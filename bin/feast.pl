@@ -2,6 +2,14 @@ use v6;
 
 my $feast = open "feast.html", :w;
 
+use MONKEY_TYPING;
+augment class Str {
+    method xml ($name : *@content, *%attrs) {
+        ("<$name {%attrs.kv.map: {"$^a='$^b'"}}>", "</$name>").join: @content ?? @content.join !! ''
+    }
+}
+sub xml-encode ($_) { .trans(/\</ => '&lt', /\&/ => '&amp;') }
+
 say "Preparing roasted implementations";
 
 my %dat;
@@ -108,14 +116,6 @@ END {
     $feast.close;
 }
 
-
-use MONKEY_TYPING;
-augment class Str {
-    method xml ($name : *@content, *%attrs) {
-        ("<$name {%attrs.kv.map: {"$^a='$^b'"}}>", "</$name>").join: @content ?? @content.join !! ''
-    }
-}
-sub xml-encode ($_) { .trans(/\</ => '&lt', /\&/ => '&amp;') }
 
 sub table-row (*@d) { <tr>.xml: @d.map({<td>.xml: $_})}
 $feast.say: <table>.xml: :class<header>, table-row('', |@impls.map: *.trans('.' => ' ').wordcase);
