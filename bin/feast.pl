@@ -5,8 +5,9 @@ $feast.say: q:to[EOHTML];
     <!doctype html>
     <html>
     <head>
-    <style>
-    </style>
+        <meta charset="utf-8">
+        <style>
+        </style>
     </head>
     <body>
     <table>
@@ -22,13 +23,14 @@ END {
     $feast.close;
 }
 
+say "Preparing roasted implementations";
 my %dat;
 my Str @impls;
 # Grab each file in log dir, extract
 # the skips and todos for each file,
 # and sort? them???? and display.
 for dir("log")[2,4..*] -> $log-path {
-    my $impl = $log-path.parts<basename>.subst: /'_summary.out' $/, '';
+    my $impl = $log-path.parts<basename>.trans: /'_summary.out' $/ => '';
     say "Collecting the charred remains of $impl";
     @impls.push: $impl;
     my (Str $section, Str $test-file);
@@ -50,25 +52,35 @@ for dir("log")[2,4..*] -> $log-path {
         }
         # Currently very simple, might improve later
         when m[ ^ (\s+ $<num>=\d+) { $0.comb == 6 } ' skipped: ' (.*) $ ] {
-            %dat{$section}{$test-file}{$impl}.push: $/~'<br/>';
+            %dat{$section}{$test-file}{$impl}.push: '<br/>' R~ xml-encode $_;
         }
         when m[ ^ (\s+ $<num>=\d+) { $0.comb == 6 } ' todo   : ' (.*) $ ] {
-            %dat{$section}{$test-file}{$impl}.push: $/~'<br/>';
+            %dat{$section}{$test-file}{$impl}.push: '<br/>' R~ xml-encode $_;
         }
         when m[ ^ (\s+ $<num>=\d+) { $0.comb == 6 } ' tests aborted (missing ok/not ok)' $ ] {
-            %dat{$section}{$test-file}{$impl}.push: $/~'<br/>';
+            %dat{$section}{$test-file}{$impl}.push: '<br/>' R~ xml-encode $_;
         }
     }
     $log-fh.close
 }
+
 say "Writing";
-sub table-row (*@d) { $feast.say: qw[<tr> </tr>].join: @d.map({qw[<td> </td>].join: $_}).join}
-table-row('', |@impls);
-for %dat.kv -> $sect, %tests {
+
+use MONKEY_TYPING;
+augment class Str {
+    method xml ($name : *@content) { qqw[<$name> </$name>].join: @content ?? @content.join !! '' }
+}
+sub xml-encode ($_) { .trans(/\</ => '&lt', /\&/ => '&amp;') }
+
+sub table-row (*@d) { $feast.say: <tr>.xml: @d.map({<td>.xml: $_})}
+table-row('', |@impls.map: *.trans('.' => ' ').wordcase);
+for %dat.sort».kv -> $sect, %tests {
     say "Recording $sect";
-    table-row qw[<h3> </h3>].join: $sect;
-    for %tests.kv -> $test, %res {
-        %res{$_} //= '' for @impls;
+    table-row <h3>.xml: $sect;
+    for %tests.sort».kv -> $test, %res {
+        for @impls {
+            %res{$_} //= '';
+        }
         table-row $test, |%res{@impls};
     }
 }
