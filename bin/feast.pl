@@ -34,8 +34,7 @@ for dir("log")[2,4..*] -> $log-path {
               [ \S ]+?
             )
             '.' [ $impl | t ]
-            \.* [\s+ \d+]**5
-            $
+            # \.* [\s+ \d+]**5 $
         ] {
             $test-file = $0 ~ '.t';
             $section   = $0.comb: /^<ident>+/;
