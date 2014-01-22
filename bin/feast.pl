@@ -10,13 +10,9 @@ $feast.say: q:to[EOHTML];
         </style>
     </head>
     <body>
-    <table>
-        <tr>
     EOHTML
 END {
     $feast.say: q:to[EOHTML];
-            </tr>
-        </table>
         </body>
         </html>
         EOHTML
@@ -72,16 +68,18 @@ augment class Str {
 }
 sub xml-encode ($_) { .trans(/\</ => '&lt', /\&/ => '&amp;') }
 
-sub table-row (*@d) { $feast.say: <tr>.xml: @d.map({<td>.xml: $_})}
-table-row('', |@impls.map: *.trans('.' => ' ').wordcase);
-for %dat.sort».kv -> $sect, %tests {
+sub table-row (*@d) { <tr>.xml: @d.map({<td>.xml: $_})}
+$feast.say: <table>.xml: table-row('', |@impls.map: *.trans('.' => ' ').wordcase);
+$feast.say: %dat.sort».kv.map: -> $sect, %tests {
     say "Recording $sect";
-    table-row <h3>.xml: $sect;
-    for %tests.sort».kv -> $test, %res {
-        for @impls {
-            %res{$_} //= '';
-        }
-        table-row $test, |%res{@impls};
-    }
+    <div>.xml:
+        <h3>.xml($sect),
+        <table>.xml: join '',
+            %tests.sort».kv.map: -> $test, %res {
+                for @impls {
+                    %res{$_} //= '';
+                }
+                table-row $test, |%res{@impls};
+            }
 }
 # vim: se ft=perl6
