@@ -64,7 +64,9 @@ say "Writing";
 
 use MONKEY_TYPING;
 augment class Str {
-    method xml ($name : *@content) { qqw[<$name> </$name>].join: @content ?? @content.join !! '' }
+    method xml ($name : *@content, *%attrs) {
+        ("<$name {%attrs.kv.map: {"$^a='$^b'"}}>", "</$name>").join: @content ?? @content.join !! ''
+    }
 }
 sub xml-encode ($_) { .trans(/\</ => '&lt', /\&/ => '&amp;') }
 
