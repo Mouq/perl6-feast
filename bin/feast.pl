@@ -4,8 +4,8 @@ use MONKEY_TYPING;
 augment class Str {
     method xml ($name : *@content, *%attrs) {
         ~ "<$name"~%attrs.kv.map({" $^a='$^b'"}).join~">\n"
-        ~ @content.join("\n").indent(4)
-        ~ "\n</$name>\n"
+        ~ @content.map(*~"\n").join.indent(4)
+        ~ "</$name>"
     }
 }
 sub xml-encode ($_) { .trans(/\</ => '&lt', /\&/ => '&amp;') }
@@ -78,43 +78,8 @@ $feast.say: q:to[EOHTML];
     <html>
     <head>
         <meta charset="utf-8">
-        <style>
-        body {
-            padding: 5em;
-        }
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            border: none;
-        }
-        tr { width: 100%; }
-        td {
-            vertical-align: top;
-            border-bottom: solid 1px grey;
-            width: 20%;
-            overflow: auto;
-        }
-        .section .section-body { display: none; }
-        .section input[type=checkbox]:checked ~ table { display: inherit; }
-        .section {
-            padding-bottom: 3px;
-            border-bottom: 2px dotted;
-            background-color: #DFF;
-            margin: 3px;
-        }
-        .section .title {
-            font-size: 130%;
-            font-weight: bold;
-        }
-        .section td + td {
-            font-family: monospace;
-        }
-        .result {
-            overflow: auto;
-            margin-bottom: 3px;
-            border: 1px dotted grey;
-        }
-        </style>
+        <link href='feast.css' rel='stylesheet' type='text/css'>
+        <title>Feast: Roasted Perl 6</title>
     </head>
     <body>
     EOHTML
