@@ -3,7 +3,9 @@ use v6;
 use MONKEY_TYPING;
 augment class Str {
     method xml ($name : *@content, *%attrs) {
-        ("<$name {%attrs.kv.map: {"$^a='$^b'"}}>", "</$name>").join: @content ?? @content.join !! ''
+        ~ "<$name"~%attrs.kv.map({" $^a='$^b'"}).join~">\n"
+        ~ @content.join("\n").indent(4)
+        ~ "\n</$name>\n"
     }
 }
 sub xml-encode ($_) { .trans(/\</ => '&lt', /\&/ => '&amp;') }
@@ -85,12 +87,14 @@ $feast.say: q:to[EOHTML];
             border-collapse: collapse;
             border: none;
         }
+        tr { width: 100%; }
         td {
             vertical-align: top;
             border-bottom: solid 1px grey;
             width: 20%;
+            overflow: auto;
         }
-        .section table { display: none; }
+        .section .section-body { display: none; }
         .section input[type=checkbox]:checked ~ table { display: inherit; }
         .section {
             padding-bottom: 3px;
@@ -106,7 +110,7 @@ $feast.say: q:to[EOHTML];
             font-family: monospace;
         }
         .result {
-            color: black;
+            overflow: auto;
             margin-bottom: 3px;
             border: 1px dotted grey;
         }
@@ -131,12 +135,14 @@ $feast.say: %dat.sort».kv.map: -> $sect, %tests {
     <div>.xml: :class<section>,
         '<input type="checkbox"/>',
         <span>.xml($sect.tc, :class<title>),
-        <table>.xml: join '',
+        <table>.xml: :class<section-body>,
             %tests.sort».kv.map: -> $test, %res {
-                for @impls {
-                    %res{$_} //= '';
-                }
-                table-row $test, |%res{@impls};
+                state $last-dir = '';
+                my ($dir, $t) = $test.split: '/';
+                %res{$_} //= '' for @impls;
+                my $r = '';
+                $r = <td>.xml: $dir, :class<test-dir> if $last-dir ne $dir and $last-dir = $dir;
+                $r, table-row $t, |%res{@impls}
             }
 }
 # vim: ft=perl6
