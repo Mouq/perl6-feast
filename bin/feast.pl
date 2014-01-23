@@ -1,7 +1,5 @@
 use v6;
 
-my $feast = open "feast.html", :w;
-
 use MONKEY_TYPING;
 augment class Str {
     method xml ($name : *@content, *%attrs) {
@@ -21,52 +19,57 @@ for dir("log")[2,4..*] -> $log-path {
     my $impl = $log-path.parts<basename>.trans: /'_summary.out' $/ => '';
     say "Collecting the charred remains of $impl";
     @impls.push: $impl;
-    my (Str $section, Str $test-file);
+
     my $log-fh = $log-path.open;
-    my $line = 0; # Rakudo's IO.ins tends to display total line count
+    my $*line = 0; # Rakudo's IO.ins tends to display total line count
+
+    my (Str $*section, Str $*test-file);
+    my Bool $failure-summary; # (have we reached the failure summary yet?)
+
     my $github-addr = 'https://github.com/coke/perl6-roast-data/blob/master/';
+
+    my sub add-result ($r) {
+        %dat{$*section}{$*test-file}{$impl}.push:
+            <div>.xml: :class<result>, <a>.xml:
+                :class<ref>
+                :href("$github-addr$log-path#L$*line"),
+                xml-encode $r;
+    }
+
     for $log-fh.lines {
-        $line++;
+        $*line++;
         when m[
             ^
             (
               [ S\d\d\- | integration | rosettacode ]
-              [ \S ]+?
+              \S+?
             )
             '.' [ $impl | t ]
-            # \.* [\s+ \d+]**5 $
+            (.*)
         ] {
-            $test-file = $0 ~ '.t';
-            $section   = $0.comb: /^<ident>+/;
-            say "Processing {$impl}'s $section at $test-file";
+            $*test-file = $0 ~ '.t';
+            $*section   = $0.comb: /^<ident>+/;
+            say "Processing {$impl}'s $*section at $*test-file";
+            if $failure-summary {
+                add-result 'Failed test #'~$1;
+            }
         }
         # Currently very simple, might improve later
         when m[ ^ (\s+ $<num>=\d+) { $0.comb == 6 } ' skipped: ' (.*) $ ] {
-            %dat{$section}{$test-file}{$impl}.push:
-                '<br/>' R~ <a>.xml:
-                    :class<ref>
-                    :href("$github-addr$log-path#L$line"),
-                    xml-encode $_;
+            add-result $_;
         }
         when m[ ^ (\s+ $<num>=\d+) { $0.comb == 6 } ' todo   : ' (.*) $ ] {
-            %dat{$section}{$test-file}{$impl}.push:
-                '<br/>' R~ <a>.xml:
-                    :class<ref>
-                    :href("$github-addr$log-path#L$line"),
-                    xml-encode $_;
+            add-result $_;
         }
         when m[ ^ (\s+ $<num>=\d+) { $0.comb == 6 } ' tests aborted (missing ok/not ok)' $ ] {
-            %dat{$section}{$test-file}{$impl}.push:
-                '<br/>' R~ <a>.xml:
-                    :class<ref>
-                    :href("$github-addr$log-path#L$line"),
-                    xml-encode $_;
+            add-result $_;
         }
     }
     $log-fh.close
 }
 
 say "Writing";
+my $feast = open 'feast.html', :w;
 
 $feast.say: q:to[EOHTML];
     <!doctype html>
@@ -102,6 +105,11 @@ $feast.say: q:to[EOHTML];
         .section td + td {
             font-family: monospace;
         }
+        .result {
+            color: black;
+            margin-bottom: 3px;
+            border: 1px dotted grey;
+        }
         </style>
     </head>
     <body>
@@ -131,4 +139,4 @@ $feast.say: %dat.sort».kv.map: -> $sect, %tests {
                 table-row $test, |%res{@impls};
             }
 }
-# vim: se ft=perl6
+# vim: ft=perl6
