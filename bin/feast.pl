@@ -28,15 +28,14 @@ for dir("log")[2,4..*] -> $log-path {
     my $log-fh = $log-path.open;
     my $*line = 0; # Rakudo's IO.ins tends to display total line count
 
-    my (Str $*section, Str $*test-file);
+    my (Str $*section, Str $*test-file, Str $*test-dir);
     my Bool $failure-summary; # (have we reached the failure summary yet?)
 
     my sub add-result ($r) {
-        %dat{$*section}{$*test-file}{$impl}.push:
-            <div>.xml: :class<result>, <a>.xml:
-                :class<ref>
-                :href("%github<roast-data>$log-path#L$*line"),
-                xml-encode $r;
+        %dat{$*section}{$*test-dir}{$*test-file}{$impl}.push:
+            <a>.xml: :class<ref>:href("%github<roast-data>$log-path#L$*line"),
+                <div>.xml: :class<result>,
+                    xml-encode $r;
     }
 
     for $log-fh.lines {
@@ -50,7 +49,8 @@ for dir("log")[2,4..*] -> $log-path {
             '.' [ $impl | t ]
             (.*)
         ] {
-            $*test-file = $0 ~ '.t';
+            ($*test-dir, $*test-file) = split '/', ~$0;
+            $*test-file ~= '.t';
             $*section   = $0.comb: /^<ident>+/;
             say "Processing {$impl}'s $*section at $*test-file";
             if $failure-summary {
@@ -98,24 +98,35 @@ END {
 }
 
 
-sub table-row (*@d) { <tr>.xml: @d.map({<td>.xml: $_})}
-$feast.say: <table>.xml: :class<header>, table-row('', |@impls.map: *.trans('.' => ' ').wordcase);
-%dat.sort».kv.map: -> $sect, %tests {
+$feast.say: <div>.xml: :class<impls>,
+    |('&nbsp;',@impls).map: {
+        <div>.xml: :class«cell {$_.trans: '.'=>'-'}», $_.trans('.' => ' ').wordcase
+    }
+
+for %dat.sort».kv -> $sect, %testdirs {
+    # Split the tests by major section (S01, S02, etc.):
     say "Recording $sect";
     $feast.say: <div>.xml: :class<section>,
-        '<input type="checkbox"/>',
         <div>.xml($sect.tc, :class<title>),
-        <table>.xml: :class<section-body>,
-            %tests.sort».kv.map: -> $test, %res {
-                state $last-dir = '';
-                my ($dir, $t) = $test.split: '/';
-                %res{$_} //= '' for @impls;
-                my $r = '';
-                if $last-dir ne $dir {
-                    $r = <td>.xml: :class<test-dir>, $dir.split('-')[1..*].Str.wordcase;
-                    $last-dir = $dir;
+        <div>.xml: :class<section-body>, |%testdirs.sort».kv.map: -> $testdir, %testfiles {
+            # Each test directory (S01-perl-5-integration,etc.)
+            # has its own sub-section:
+            <div>.xml: :class<directory>,
+                <div>.xml(:class<title>, $testdir.split('-')[1..*].Str.wordcase),
+                # Each test file has its own set of results
+                # which we classify by implementation:
+                |%testfiles.sort».kv.map: -> $testfile, %res {
+                    %res{$_} //= '&nbsp;' for @impls;
+                    <a>.xml(
+                        :href("%github<roast>$testdir/$testfile"),
+                        <div>.xml: :class<cell>, $testfile
+                    ),
+                    @impls.map: -> $impl {
+                        %res{$impl}.map: {
+                            <div>.xml: :class«cell {$impl.trans: '.'=>'-'}», $_
+                        }
+                    }
                 }
-                $r, table-row <a>.xml($t,:href(%github<roast>~$test)), |%res{@impls}
-            }
+        }
 }
 # vim: ft=perl6
