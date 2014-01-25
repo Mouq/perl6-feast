@@ -99,6 +99,7 @@ END {
 
 
 $feast.say: <div>.xml: :class<impls>,
+    <div>.xml(:class<cell>, '&nbsp;'),
     |('&nbsp;',@impls).map: {
         <div>.xml: :class«cell {$_.trans: '.'=>'-'}», $_.trans('.' => ' ').wordcase
     }
@@ -121,11 +122,12 @@ for %dat.sort».kv -> $sect, %testdirs {
                         :href("%github<roast>$testdir/$testfile"),
                         <div>.xml: :class<cell>, $testfile
                     ),
-                    @impls.map: -> $impl {
+                    (@impls.map: -> $impl {
                         %res{$impl}.map: {
                             <div>.xml: :class«cell {$impl.trans: '.'=>'-'}», $_
                         }
-                    }
+                    }),
+                    '<br>'
                 }
         }
 }

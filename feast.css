@@ -60,7 +60,10 @@ tr td:first-child.test-dir {
     font-size: 1.3em;
     overflow: hidden;
 }
-/* .section .section-body { display: none; } */
+.section .section-body {
+    overflow: hidden;
+    /*display: none; */
+}
 .section input[type=checkbox]:checked ~ table { display: inherit; }
 .section {
     padding-bottom: 3px;
