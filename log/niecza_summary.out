@@ -2284,7 +2284,7 @@ S05-metachars/line-anchors.t.......................  19    0    0    0   19
 S05-metachars/newline.t............................  15    0    0    0   15
 S05-metachars/tilde.niecza.........................  15    0    0   11   26
     11 skipped: Unable to resolve method FAILGOAL in class Cursor
-S05-metasyntax/angle-brackets.niecza...............  53    0    3   24   80
+S05-metasyntax/angle-brackets.niecza...............  63    0    3   24   90
     11 skipped: Action method assertion:sym<*> not yet implemented
      1 skipped: Anonymous submatch returned a Str instead of a Cursor, violating the submatch protocol
      2 skipped: Action method assertion:sym<~~>
@@ -2781,7 +2781,7 @@ S06-advanced/caller.niecza.........................Potential difficulties:
    2    0    1   16   19
     16 skipped: NYI
      1 todo   : try interferes with caller counting
-S06-advanced/callframe.niecza......................   3    1    1    3    8
+S06-advanced/callframe.niecza......................   4    0    1    3    8
      1 skipped: Unable to resolve method inline in type CallFrame
      2 skipped: Unable to resolve method my in type CallFrame
      1 todo   : needs .my
@@ -3944,9 +3944,15 @@ S12-methods/private.niecza.........................Potential difficulties:
   &is_run is declared but not used at /home/coke/sandbox/perl6-roast-data/niecza/t/spec/S12-methods/private.niecza line 4:
 ------> [32m<BOL>[33m⏏[31muse Test::Util;[0m
 
-  10    0    1    2   13
-     2 skipped: throws_like NYI
-     1 todo   : role private methods - spec?
+Unhandled exception: Unable to resolve method postcircumfix:<( )> in type Any
+  at /home/coke/sandbox/perl6-roast-data/niecza/t/spec/S12-methods/private.niecza line 82 (ANON @ 17) 
+  at /home/coke/sandbox/perl6-roast-data/niecza/t/spec/S12-methods/private.niecza line 108 (mainline @ 35) 
+  at /home/coke/sandbox/perl6-roast-data/niecza/lib/CORE.setting line 4595 (ANON @ 3) 
+  at /home/coke/sandbox/perl6-roast-data/niecza/lib/CORE.setting line 4596 (module-CORE @ 576) 
+  at /home/coke/sandbox/perl6-roast-data/niecza/lib/CORE.setting line 4596 (mainline @ 3) 
+  at <unknown> line 0 (ExitRunloop @ 0) 
+   9    7    0    0   16
+     7 tests aborted (missing ok/not ok)
 S12-methods/submethods.niecza......................  23    0    4    0   27
      4 todo   : 
 S12-methods/syntax.niecza..........................   8    0    0    4   12
@@ -5985,13 +5991,13 @@ Use of uninitialized value in string context
 "S02",        3173,    17,   121,   385,  3696,  4480
 "S03",        3677,     0,   198,   407,  4282,  4668
 "S04",         801,     0,    35,    60,   896,  1040
-"S05",        4138,     8,    97,   227,  4470,  5837
-"S06",         780,     2,    58,   162,  1002,  1292
+"S05",        4148,     8,    97,   227,  4480,  5847
+"S06",         781,     1,    58,   162,  1002,  1292
 "S07",           0,     0,     0,     0,     0,     0
 "S09",          66,     0,     1,     8,    75,   200
 "S10",          35,     0,     5,    19,    59,   128
 "S11",           0,     0,     0,     0,     0,   139
-"S12",         784,     1,    65,   179,  1029,  1409
+"S12",         783,     8,    64,   177,  1032,  1412
 "S13",          31,     0,     1,    10,    42,    80
 "S14",         168,     0,     1,    11,   180,   328
 "S16",         185,     0,     5,    41,   231,   302
@@ -6003,7 +6009,7 @@ Use of uninitialized value in string context
 "S29",         304,     2,     2,    10,   318,   350
 "S32",        6754,     0,   137,   285,  7176,  7051
 "int",         464,    12,    22,    27,   525,   575
-"total",     21371,    42,   749,  1831, 23993, 28521
+"total",     21381,    48,   748,  1829, 24006, 28534
 ----------------
 Failure summary:
 S02-literals/quoting.niecza 156 - \c followed by non-number
@@ -6018,8 +6024,8 @@ S05-mass/rx.niecza 429 - sigspace (:s)
 S05-mass/rx.niecza 434 - sigspace (:sigspace)
 S05-mass/rx.niecza 437 - sigspace (:sigspace)
 S05-modifier/sigspace.t 10 - inline :s doesn't imply <.ws> immediately (-)
-S06-advanced/callframe.niecza 2 - callframe().line
 S06-signature/errors.niecza 11
+S12-methods/private.niecza aborted 7 test(s)
 S12-methods/topic.t 1 - $_ is not set in methods...
 S29-context/exit.t 2 - exit 5; works
 S29-context/exit.t 3 - try-block does not catch exit exceptions
