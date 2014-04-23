@@ -20,7 +20,7 @@ my Str @impls;
 # Grab each file in log dir, extract
 # the skips and todos for each file,
 # and sort? them???? and display.
-for dir("log")[2,4..*] -> $log-path {
+for dir("log")[0,2..*] -> $log-path {
     my $impl = $log-path.parts<basename>.trans: /'_summary.out' $/ => '';
     say "Collecting the charred remains of $impl";
     @impls.push: $impl;
