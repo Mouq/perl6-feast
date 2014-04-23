@@ -20,7 +20,7 @@ S02-lexical-conventions/minimal-whitespace.t.......Potential difficulties:
 ------> [32mmy [33m⏏[31m$o = Thing.new;[0m
 
    9    0    0    0    9
-S02-lexical-conventions/one-pass-parsing.t.........   1    0    0    0    1
+S02-lexical-conventions/one-pass-parsing.t.........   3    0    0    0    3
 S02-lexical-conventions/pod-in-multi-line-exprs.t..Potential difficulties:
   $mysub is declared but not used at /home/coke/sandbox/perl6-roast-data/niecza/t/spec/S02-lexical-conventions/pod-in-multi-line-exprs.t line 13:
 ------> [32mmy [33m⏏[31m$mysub = {[0m
@@ -32,19 +32,24 @@ S02-lexical-conventions/pod-in-multi-line-exprs.t..Potential difficulties:
    3    0    0    0    3
 S02-lexical-conventions/sub-block-parsing.t........   9    0    0    0    9
 S02-lexical-conventions/unicode-whitespace.t.......Potential difficulties:
-  &foo is declared but not used at /home/coke/sandbox/perl6-roast-data/niecza/t/spec/S02-lexical-conventions/unicode-whitespace.t line 203:
+  &foo is declared but not used at /home/coke/sandbox/perl6-roast-data/niecza/t/spec/S02-lexical-conventions/unicode-whitespace.t line 199:
 ------> [32mmulti foo[33m⏏[31m() { 'a' }[0m
 
-  52    0    0    0   52
+  50    0    0    0   50
 S02-lexical-conventions/unicode.t..................Potential difficulties:
   $पहला is declared but not used at /home/coke/sandbox/perl6-roast-data/niecza/t/spec/S02-lexical-conventions/unicode.t line 60:
 ------> [32mlives_ok { my [33m⏏[31m$पहला = 1; }, "hindi declaration";[0m
 
   38    0    0    0   38
-S02-lexical-conventions/unspace.niecza.............  73    0    0    5   78
-     1 skipped: Unable to resolve method id in class Str
-     1 skipped: Unable to resolve method postcircumfix:<( )> in class Str
-     3 skipped: Invocant handling is NYI
+S02-lexical-conventions/unspace.niecza.............[31m===[0mSORRY![31m===[0m
+
+Confused at /home/coke/sandbox/perl6-roast-data/niecza/t/spec/S02-lexical-conventions/unspace.niecza line 300:
+------> [32mis "foo"[33m⏏[31m.\ \ perl, "foo".perl, 'two unspace in a[0m
+
+Parse failed
+
+   0   86    0    0   86
+    86 tests aborted (missing ok/not ok)
 S02-literals/array-interpolation.t.................  12    0    0    0   12
 S02-literals/autoref.niecza........................Use of uninitialized value in string context
   at /home/coke/sandbox/perl6-roast-data/niecza/lib/CORE.setting line 1389 (warn @ 5) 
@@ -103,14 +108,14 @@ S02-literals/pairs.niecza..........................  76    0    2    1   79
 S02-literals/quoting-unicode.niecza................  72    0    0    1   73
      1 skipped: Parse failure
 S02-literals/quoting.niecza........................Potential difficulties:
-  $x is declared but not used at /home/coke/sandbox/perl6-roast-data/niecza/t/spec/S02-literals/quoting.niecza line 555:
+  $x is declared but not used at /home/coke/sandbox/perl6-roast-data/niecza/t/spec/S02-literals/quoting.niecza line 549:
 ------> [32mis "foo $( my [33m⏏[31m$x = 3 + 4; "bar" ) baz", 'foo bar baz',[0m
 
 Potential difficulties:
   $ya is declared but not used at (eval) line 1:
 ------> [32mmy [33m⏏[31m$ya="\cIa"[0m
 
- 122    1   22   11  156
+ 124    2   22   11  159
      9 skipped: & escape, zen slices
      2 skipped: & escape
     19 todo   : 
@@ -198,17 +203,7 @@ S02-names-vars/fmt.t...............................  21    0    0    0   21
 S02-names-vars/list_array_perl.niecza..............  19    0    1    1   21
      1 skipped: hanging test
      1 todo   : 
-S02-names-vars/names.niecza........................Use of uninitialized value in string context
-  at /home/coke/sandbox/perl6-roast-data/niecza/lib/CORE.setting line 1389 (warn @ 5) 
-  at /home/coke/sandbox/perl6-roast-data/niecza/lib/CORE.setting line 269 (Mu.Str @ 15) 
-  at <unknown> line 0 (ExitRunloop @ 0) 
-  at /home/coke/sandbox/perl6-roast-data/niecza/t/spec/S02-names-vars/names.niecza line 78 (ANON @ 14) 
-  at /home/coke/sandbox/perl6-roast-data/niecza/t/spec/S02-names-vars/names.niecza line 141 (mainline @ 31) 
-  at /home/coke/sandbox/perl6-roast-data/niecza/lib/CORE.setting line 4595 (ANON @ 3) 
-  at /home/coke/sandbox/perl6-roast-data/niecza/lib/CORE.setting line 4596 (module-CORE @ 576) 
-  at /home/coke/sandbox/perl6-roast-data/niecza/lib/CORE.setting line 4596 (mainline @ 3) 
-  at <unknown> line 0 (ExitRunloop @ 0) 
- 128    0    1   13  142
+S02-names-vars/names.niecza........................ 128    0    1   13  142
      7 skipped: Undeclared name: Terrain::
      4 skipped: Postconstraints, and shapes on variable declarators NYI
      2 skipped: Object reference not set to an instance of an object
@@ -455,7 +450,7 @@ S02-types/autovivification.niecza..................Potential difficulties:
      5 skipped: Unable to resolve method push in type Any
      2 todo   : https://github.com/sorear/niecza/issues/176
 S02-types/bag.niecza...............................Potential difficulties:
-  @ks is declared but not used at /home/coke/sandbox/perl6-roast-data/niecza/t/spec/S02-types/bag.niecza line 92:
+  @ks is declared but not used at /home/coke/sandbox/perl6-roast-data/niecza/t/spec/S02-types/bag.niecza line 88:
 ------> [32m    my [33m⏏[31m@ks = $b.keys;[0m
 
 Use of uninitialized value in string context
@@ -466,7 +461,7 @@ Use of uninitialized value in string context
   at <unknown> line 0 (KERNEL map @ 2) 
   at /home/coke/sandbox/perl6-roast-data/niecza/lib/CORE.setting line 370 (Any.map @ 4) 
   at /home/coke/sandbox/perl6-roast-data/niecza/t/spec/S02-types/bag.niecza line 7 (showkv @ 6) 
-  at /home/coke/sandbox/perl6-roast-data/niecza/t/spec/S02-types/bag.niecza line 374 (mainline @ 317) 
+  at /home/coke/sandbox/perl6-roast-data/niecza/t/spec/S02-types/bag.niecza line 370 (mainline @ 317) 
   at /home/coke/sandbox/perl6-roast-data/niecza/lib/CORE.setting line 4595 (ANON @ 3) 
   at /home/coke/sandbox/perl6-roast-data/niecza/lib/CORE.setting line 4596 (module-CORE @ 576) 
   at /home/coke/sandbox/perl6-roast-data/niecza/lib/CORE.setting line 4596 (mainline @ 3) 
@@ -479,18 +474,19 @@ Use of uninitialized value in string context
   at <unknown> line 0 (KERNEL map @ 2) 
   at /home/coke/sandbox/perl6-roast-data/niecza/lib/CORE.setting line 370 (Any.map @ 4) 
   at /home/coke/sandbox/perl6-roast-data/niecza/t/spec/S02-types/bag.niecza line 7 (showkv @ 6) 
-  at /home/coke/sandbox/perl6-roast-data/niecza/t/spec/S02-types/bag.niecza line 384 (mainline @ 339) 
+  at /home/coke/sandbox/perl6-roast-data/niecza/t/spec/S02-types/bag.niecza line 380 (mainline @ 339) 
   at /home/coke/sandbox/perl6-roast-data/niecza/lib/CORE.setting line 4595 (ANON @ 3) 
   at /home/coke/sandbox/perl6-roast-data/niecza/lib/CORE.setting line 4596 (module-CORE @ 576) 
   at /home/coke/sandbox/perl6-roast-data/niecza/lib/CORE.setting line 4596 (mainline @ 3) 
   at <unknown> line 0 (ExitRunloop @ 0) 
- 146    0    5   22  173
+ 144    0    5   38  187
      2 skipped: BagHash
      3 skipped: Non-Str keys NYI
      1 skipped: .grabpairs NYI
      2 skipped: SetHash
     11 skipped: .pickpairs NYI
      1 skipped: .grab NYI
+    16 skipped: .total/.minpairs/.maxpairs NYI
      2 skipped: Unmatched key in Hash.LISTSTORE
      4 todo   : Bag in Bag does not work correctly yet
      1 todo   : Non-string bag elements NYI
@@ -498,15 +494,17 @@ S02-types/baghash.niecza...........................Potential difficulties:
   @ks is declared but not used at /home/coke/sandbox/perl6-roast-data/niecza/t/spec/S02-types/baghash.niecza line 115:
 ------> [32m    my [33m⏏[31m@ks = $b.keys;[0m
 
- 152    1    2   71  226
-    24 skipped: Trait name not available on variables
+Unhandled exception: Unable to resolve method tree in type List
+  at /home/coke/sandbox/perl6-roast-data/niecza/t/spec/S02-types/baghash.niecza line 128 (ANON @ 7) 
+  at /home/coke/sandbox/perl6-roast-data/niecza/t/spec/S02-types/baghash.niecza line 562 (mainline @ 164) 
+  at /home/coke/sandbox/perl6-roast-data/niecza/lib/CORE.setting line 4595 (ANON @ 3) 
+  at /home/coke/sandbox/perl6-roast-data/niecza/lib/CORE.setting line 4596 (module-CORE @ 576) 
+  at /home/coke/sandbox/perl6-roast-data/niecza/lib/CORE.setting line 4596 (mainline @ 3) 
+  at <unknown> line 0 (ExitRunloop @ 0) 
+  67  171    1    3  242
      3 skipped: Non-Str keys NYI
-    14 skipped: .grabpairs NYI
-    11 skipped: .pickpairs NYI
-    17 skipped: .grab NYI
-     2 skipped: Unmatched key in Hash.LISTSTORE
      1 todo   : 
-     1 todo   : Non-string bag elements NYI
+   171 tests aborted (missing ok/not ok)
 S02-types/bool.t...................................  51    0    0    0   51
 S02-types/catch_type_cast_mismatch.niecza..........   8    0    1    1   10
      1 skipped: Failure NYI
@@ -616,22 +614,24 @@ S02-types/range.niecza.............................Potential difficulties:
      2 skipped: Unable to resolve method reverse in class Range
      1 skipped: Attempted to access slot $!min of type object for Range
      1 skipped: Undeclared name: "Failure"
-S02-types/set.niecza............................... 119    0   10   22  151
+S02-types/set.niecza............................... 119    0   10   30  159
      1 skipped: .grabpairs NYI
      1 skipped: .grab NYI
     10 skipped: Hypers not yet Set compatible
      3 skipped: .total NYI
      2 skipped: SetHash
      2 skipped: BagHash
+     8 skipped: .total/.minpairs/.maxpairs NYI
      3 skipped: Unmatched key in Hash.LISTSTORE
      5 todo   : 
      4 todo   : Set in Set does not work correctly yet
      1 todo   : Losing type in Set
-S02-types/sethash.niecza........................... 136    1    1   45  183
+S02-types/sethash.niecza........................... 136    1    1   53  191
     10 skipped: is SetHash doesn't work yet
     18 skipped: .grabpairs NYI
     14 skipped: .grab NYI
      3 skipped: .total NYI
+     8 skipped: .total/.minpairs/.maxpairs NYI
      1 todo   : Non-string keys NYI
 S02-types/sigils-and-types.niecza..................  21    0    1    6   28
      1 skipped: Undeclared name Buf
@@ -728,72 +728,22 @@ S03-junctions/misc.niecza..........................Potential difficulties:
   99    0    2    4  105
      4 skipped: Impossible test: === takes Any
      2 todo   : #82
-S03-metaops/cross.niecza...........................  26    0    1    1   28
+S03-metaops/cross.niecza...........................  27    0    1    1   29
      1 skipped: Unable to resolve method slice in class List
-     1 todo   : 
+     1 todo PASSED: 
 S03-metaops/hyper.niecza...........................Potential difficulties:
-  @r2 is declared but not used at /home/coke/sandbox/perl6-roast-data/niecza/t/spec/S03-metaops/hyper.niecza line 344:
+  @r2 is declared but not used at /home/coke/sandbox/perl6-roast-data/niecza/t/spec/S03-metaops/hyper.niecza line 332:
 ------> [32m        my [33m⏏[31m@r2;[0m
 
-Use of uninitialized value in numeric context
-  at /home/coke/sandbox/perl6-roast-data/niecza/lib/CORE.setting line 1389 (warn @ 5) 
-  at /home/coke/sandbox/perl6-roast-data/niecza/lib/CORE.setting line 301 (Any.Numeric @ 8) 
-  at <unknown> line 0 (ExitRunloop @ 0) 
-  at /home/coke/sandbox/perl6-roast-data/niecza/lib/CORE.setting line 58 (infix:<+> @ 3) 
-  at /home/coke/sandbox/perl6-roast-data/niecza/lib/CORE.setting line 3367 (ANON @ 7) 
-  at /home/coke/sandbox/perl6-roast-data/niecza/lib/CORE.setting line 3380 (hyper @ 16) 
-  at /home/coke/sandbox/perl6-roast-data/niecza/lib/CORE.setting line 3321 (_hyper_hash @ 33) 
-  at /home/coke/sandbox/perl6-roast-data/niecza/lib/CORE.setting line 3381 (hyper @ 26) 
-  at /home/coke/sandbox/perl6-roast-data/niecza/t/spec/S03-metaops/hyper.niecza line 416 (mainline @ 461) 
+Unhandled exception: Unable to resolve method deepmap in type Parcel
+  at /home/coke/sandbox/perl6-roast-data/niecza/t/spec/S03-metaops/hyper.niecza line 276 (ANON @ 5) 
+  at /home/coke/sandbox/perl6-roast-data/niecza/t/spec/S03-metaops/hyper.niecza line 759 (mainline @ 302) 
   at /home/coke/sandbox/perl6-roast-data/niecza/lib/CORE.setting line 4595 (ANON @ 3) 
   at /home/coke/sandbox/perl6-roast-data/niecza/lib/CORE.setting line 4596 (module-CORE @ 576) 
   at /home/coke/sandbox/perl6-roast-data/niecza/lib/CORE.setting line 4596 (mainline @ 3) 
   at <unknown> line 0 (ExitRunloop @ 0) 
-Use of uninitialized value in numeric context
-  at /home/coke/sandbox/perl6-roast-data/niecza/lib/CORE.setting line 1389 (warn @ 5) 
-  at /home/coke/sandbox/perl6-roast-data/niecza/lib/CORE.setting line 301 (Any.Numeric @ 8) 
-  at <unknown> line 0 (ExitRunloop @ 0) 
-  at /home/coke/sandbox/perl6-roast-data/niecza/lib/CORE.setting line 58 (infix:<+> @ 3) 
-  at /home/coke/sandbox/perl6-roast-data/niecza/lib/CORE.setting line 3367 (ANON @ 7) 
-  at /home/coke/sandbox/perl6-roast-data/niecza/lib/CORE.setting line 3380 (hyper @ 16) 
-  at /home/coke/sandbox/perl6-roast-data/niecza/lib/CORE.setting line 3321 (_hyper_hash @ 33) 
-  at /home/coke/sandbox/perl6-roast-data/niecza/lib/CORE.setting line 3381 (hyper @ 26) 
-  at /home/coke/sandbox/perl6-roast-data/niecza/t/spec/S03-metaops/hyper.niecza line 422 (mainline @ 471) 
-  at /home/coke/sandbox/perl6-roast-data/niecza/lib/CORE.setting line 4595 (ANON @ 3) 
-  at /home/coke/sandbox/perl6-roast-data/niecza/lib/CORE.setting line 4596 (module-CORE @ 576) 
-  at /home/coke/sandbox/perl6-roast-data/niecza/lib/CORE.setting line 4596 (mainline @ 3) 
-  at <unknown> line 0 (ExitRunloop @ 0) 
-Use of uninitialized value in numeric context
-  at /home/coke/sandbox/perl6-roast-data/niecza/lib/CORE.setting line 1389 (warn @ 5) 
-  at /home/coke/sandbox/perl6-roast-data/niecza/lib/CORE.setting line 301 (Any.Numeric @ 8) 
-  at <unknown> line 0 (ExitRunloop @ 0) 
-  at /home/coke/sandbox/perl6-roast-data/niecza/lib/CORE.setting line 58 (infix:<+> @ 3) 
-  at /home/coke/sandbox/perl6-roast-data/niecza/lib/CORE.setting line 3367 (ANON @ 7) 
-  at /home/coke/sandbox/perl6-roast-data/niecza/lib/CORE.setting line 3380 (hyper @ 16) 
-  at /home/coke/sandbox/perl6-roast-data/niecza/lib/CORE.setting line 3321 (_hyper_hash @ 33) 
-  at /home/coke/sandbox/perl6-roast-data/niecza/lib/CORE.setting line 3381 (hyper @ 26) 
-  at /home/coke/sandbox/perl6-roast-data/niecza/t/spec/S03-metaops/hyper.niecza line 444 (mainline @ 507) 
-  at /home/coke/sandbox/perl6-roast-data/niecza/lib/CORE.setting line 4595 (ANON @ 3) 
-  at /home/coke/sandbox/perl6-roast-data/niecza/lib/CORE.setting line 4596 (module-CORE @ 576) 
-  at /home/coke/sandbox/perl6-roast-data/niecza/lib/CORE.setting line 4596 (mainline @ 3) 
-  at <unknown> line 0 (ExitRunloop @ 0) 
-Use of uninitialized value in numeric context
-  at /home/coke/sandbox/perl6-roast-data/niecza/lib/CORE.setting line 1389 (warn @ 5) 
-  at /home/coke/sandbox/perl6-roast-data/niecza/lib/CORE.setting line 301 (Any.Numeric @ 8) 
-  at <unknown> line 0 (ExitRunloop @ 0) 
-  at /home/coke/sandbox/perl6-roast-data/niecza/lib/CORE.setting line 58 (infix:<+> @ 3) 
-  at /home/coke/sandbox/perl6-roast-data/niecza/lib/CORE.setting line 3367 (ANON @ 7) 
-  at /home/coke/sandbox/perl6-roast-data/niecza/lib/CORE.setting line 3380 (hyper @ 16) 
-  at /home/coke/sandbox/perl6-roast-data/niecza/lib/CORE.setting line 3321 (_hyper_hash @ 33) 
-  at /home/coke/sandbox/perl6-roast-data/niecza/lib/CORE.setting line 3381 (hyper @ 26) 
-  at /home/coke/sandbox/perl6-roast-data/niecza/t/spec/S03-metaops/hyper.niecza line 455 (mainline @ 525) 
-  at /home/coke/sandbox/perl6-roast-data/niecza/lib/CORE.setting line 4595 (ANON @ 3) 
-  at /home/coke/sandbox/perl6-roast-data/niecza/lib/CORE.setting line 4596 (module-CORE @ 576) 
-  at /home/coke/sandbox/perl6-roast-data/niecza/lib/CORE.setting line 4596 (mainline @ 3) 
-  at <unknown> line 0 (ExitRunloop @ 0) 
- 278    0    0    3  281
-     1 skipped: nonsensical test
-     2 skipped: does not work; recurses into hash
+  54  203    0    0  257
+   203 tests aborted (missing ok/not ok)
 S03-metaops/not.t..................................  33    0    0    0   33
 S03-metaops/reduce.niecza..........................Potential difficulties:
   @foo is declared but not used at /home/coke/sandbox/perl6-roast-data/niecza/t/spec/S03-metaops/reduce.niecza line 175:
@@ -813,7 +763,7 @@ S03-metaops/reduce.niecza..........................Potential difficulties:
      1 todo   : huh?
      1 todo   : unary [] does not context yet
 S03-metaops/reverse.t..............................  34    0    0    0   34
-S03-metaops/zip.niecza.............................  14    0    4    6   24
+S03-metaops/zip.niecza.............................  15    0    4    6   25
      1 skipped: Unable to resolve method munch in class List
      2 skipped: Cannot use value like Whatever as a number
      3 skipped: Unable to resolve method lol in type Parcel
@@ -948,14 +898,16 @@ Use of uninitialized value in numeric context
   at /home/coke/sandbox/perl6-roast-data/niecza/lib/CORE.setting line 4596 (module-CORE @ 576) 
   at /home/coke/sandbox/perl6-roast-data/niecza/lib/CORE.setting line 4596 (mainline @ 3) 
   at <unknown> line 0 (ExitRunloop @ 0) 
- 143    0    1    0  144
+ 144    0    1    0  145
      1 todo   : No agreement over correct behavior here -- above web page not helpful!
 S03-operators/assign-is-not-binding.t..............   8    0    0    0    8
 S03-operators/assign.niecza........................Potential difficulties:
   @z is declared but not used at /home/coke/sandbox/perl6-roast-data/niecza/t/spec/S03-operators/assign.niecza line 715:
 ------> [32m    my [33m⏏[31m@z = (%a<x y z> = l, l);[0m
+  Useless redeclaration of variable $a (see line 978) at /home/coke/sandbox/perl6-roast-data/niecza/t/spec/S03-operators/assign.niecza line 981:
+------> [32m    is (foo (my $a [33m⏏[31m= 1,2,3)), (1,2,3), "Routine call taking[0m
 
- 218    0   38   30  286
+ 222    0   38   30  290
      5 skipped: No ^^ yet
     15 skipped: Buffer bitops NYI
      2 skipped: Unable to resolve method LISTSTORE in class List
@@ -1284,9 +1236,9 @@ S03-operators/flip-flop.t..........................  39    0    0    0   39
 S03-operators/gcd.t................................  16    0    0    0   16
 S03-operators/identity.niecza......................  41    0    0    4   45
      4 skipped: Failure NYI
-S03-operators/increment.niecza.....................  29    0    2    0   31
+S03-operators/increment.niecza.....................  30    0    2    0   32
      1 todo   : Works fine in niecza...
-     1 todo   : #88
+     1 todo PASSED: #88
 S03-operators/infixed-function.t...................   5    0    0    0    5
 S03-operators/inplace.niecza.......................  25    0    2    0   27
      2 todo   : sort is not a stable sort on all platforms
@@ -1315,7 +1267,7 @@ S03-operators/not.t................................  22    0    0    0   22
 S03-operators/numeric-shift.niecza.................  24    0    0   12   36
     12 skipped: shift by negative bit count
 S03-operators/overflow.t...........................  98    0    0    0   98
-S03-operators/precedence.niecza....................  51    0    0    2   53
+S03-operators/precedence.niecza....................  52    0    0    2   54
      2 skipped: assigning to readonly value
 S03-operators/range-basic.niecza...................Potential difficulties:
   &is_run is declared but not used at /home/coke/sandbox/perl6-roast-data/niecza/t/spec/S03-operators/range-basic.niecza line 5:
@@ -1453,7 +1405,7 @@ Use of uninitialized value in string context
      4 todo PASSED: 
 S03-operators/subscript-vs-lt.t....................   4    0    0    0    4
 S03-operators/ternary.t............................  17    0    0    0   17
-S03-operators/value_equivalence.niecza.............  72    0    3    0   75
+S03-operators/value_equivalence.niecza.............  70    2    3    0   75
      3 todo   : 
 S03-sequence/arity-2-or-more.niecza................  16    0    0    3   19
      2 skipped: Undeclared names: '[%]'
@@ -1547,8 +1499,8 @@ S04-declarations/implicit-parameter.niecza.........Potential difficulties:
   $a is declared but not used at /home/coke/sandbox/perl6-roast-data/niecza/t/spec/S04-declarations/implicit-parameter.niecza line 47:
 ------> [32m    todo(); is(-> [33m⏏[31m$a { $_ }.(42),   'Ack!',       'Even wi[0m
 
-  15    0    3    0   18
-     3 todo   : 
+  16    0    2    0   18
+     2 todo   : 
 S04-declarations/multiple.niecza...................Potential difficulties:
   Useless redeclaration of variable $x (see line 15) at /home/coke/sandbox/perl6-roast-data/niecza/t/spec/S04-declarations/multiple.niecza line 17:
 ------> [32m    my $x [33m⏏[31m= 3;[0m
@@ -1642,7 +1594,7 @@ S04-phasers/enter-leave.niecza.....................Use of uninitialized value in
   at /home/coke/sandbox/perl6-roast-data/niecza/t/spec/S04-phasers/enter-leave.niecza line 13 (ANON @ 1) 
   at /home/coke/sandbox/perl6-roast-data/niecza/t/spec/S04-phasers/enter-leave.niecza line 0 (foo @ 2) 
   at /home/coke/sandbox/perl6-roast-data/niecza/t/spec/S04-phasers/enter-leave.niecza line 17 (ANON @ 6) 
-  at /home/coke/sandbox/perl6-roast-data/niecza/t/spec/S04-phasers/enter-leave.niecza line 223 (mainline @ 7) 
+  at /home/coke/sandbox/perl6-roast-data/niecza/t/spec/S04-phasers/enter-leave.niecza line 224 (mainline @ 7) 
   at /home/coke/sandbox/perl6-roast-data/niecza/lib/CORE.setting line 4595 (ANON @ 3) 
   at /home/coke/sandbox/perl6-roast-data/niecza/lib/CORE.setting line 4596 (module-CORE @ 576) 
   at /home/coke/sandbox/perl6-roast-data/niecza/lib/CORE.setting line 4596 (mainline @ 3) 
@@ -1654,7 +1606,7 @@ Use of uninitialized value in string context
   at /home/coke/sandbox/perl6-roast-data/niecza/t/spec/S04-phasers/enter-leave.niecza line 31 (ANON @ 1) 
   at /home/coke/sandbox/perl6-roast-data/niecza/t/spec/S04-phasers/enter-leave.niecza line 0 (foo @ 2) 
   at /home/coke/sandbox/perl6-roast-data/niecza/t/spec/S04-phasers/enter-leave.niecza line 33 (ANON @ 6) 
-  at /home/coke/sandbox/perl6-roast-data/niecza/t/spec/S04-phasers/enter-leave.niecza line 223 (mainline @ 9) 
+  at /home/coke/sandbox/perl6-roast-data/niecza/t/spec/S04-phasers/enter-leave.niecza line 224 (mainline @ 9) 
   at /home/coke/sandbox/perl6-roast-data/niecza/lib/CORE.setting line 4595 (ANON @ 3) 
   at /home/coke/sandbox/perl6-roast-data/niecza/lib/CORE.setting line 4596 (module-CORE @ 576) 
   at /home/coke/sandbox/perl6-roast-data/niecza/lib/CORE.setting line 4596 (mainline @ 3) 
@@ -1666,7 +1618,7 @@ Use of uninitialized value in string context
   at /home/coke/sandbox/perl6-roast-data/niecza/t/spec/S04-phasers/enter-leave.niecza line 46 (ANON @ 1) 
   at /home/coke/sandbox/perl6-roast-data/niecza/t/spec/S04-phasers/enter-leave.niecza line 0 (ANON @ 2) 
   at /home/coke/sandbox/perl6-roast-data/niecza/t/spec/S04-phasers/enter-leave.niecza line 58 (ANON @ 5) 
-  at /home/coke/sandbox/perl6-roast-data/niecza/t/spec/S04-phasers/enter-leave.niecza line 223 (mainline @ 11) 
+  at /home/coke/sandbox/perl6-roast-data/niecza/t/spec/S04-phasers/enter-leave.niecza line 224 (mainline @ 11) 
   at /home/coke/sandbox/perl6-roast-data/niecza/lib/CORE.setting line 4595 (ANON @ 3) 
   at /home/coke/sandbox/perl6-roast-data/niecza/lib/CORE.setting line 4596 (module-CORE @ 576) 
   at /home/coke/sandbox/perl6-roast-data/niecza/lib/CORE.setting line 4596 (mainline @ 3) 
@@ -1678,7 +1630,7 @@ Use of uninitialized value in string context
   at /home/coke/sandbox/perl6-roast-data/niecza/t/spec/S04-phasers/enter-leave.niecza line 66 (ANON @ 1) 
   at /home/coke/sandbox/perl6-roast-data/niecza/t/spec/S04-phasers/enter-leave.niecza line 0 (ANON @ 2) 
   at /home/coke/sandbox/perl6-roast-data/niecza/t/spec/S04-phasers/enter-leave.niecza line 70 (ANON @ 7) 
-  at /home/coke/sandbox/perl6-roast-data/niecza/t/spec/S04-phasers/enter-leave.niecza line 223 (mainline @ 13) 
+  at /home/coke/sandbox/perl6-roast-data/niecza/t/spec/S04-phasers/enter-leave.niecza line 224 (mainline @ 13) 
   at /home/coke/sandbox/perl6-roast-data/niecza/lib/CORE.setting line 4595 (ANON @ 3) 
   at /home/coke/sandbox/perl6-roast-data/niecza/lib/CORE.setting line 4596 (module-CORE @ 576) 
   at /home/coke/sandbox/perl6-roast-data/niecza/lib/CORE.setting line 4596 (mainline @ 3) 
@@ -1691,7 +1643,7 @@ Use of uninitialized value in string context
   at <unknown> line 0 (ExitRunloop @ 0) 
   at /home/coke/sandbox/perl6-roast-data/niecza/t/spec/S04-phasers/enter-leave.niecza line 79 (is_even @ 4) 
   at /home/coke/sandbox/perl6-roast-data/niecza/t/spec/S04-phasers/enter-leave.niecza line 82 (ANON @ 6) 
-  at /home/coke/sandbox/perl6-roast-data/niecza/t/spec/S04-phasers/enter-leave.niecza line 223 (mainline @ 15) 
+  at /home/coke/sandbox/perl6-roast-data/niecza/t/spec/S04-phasers/enter-leave.niecza line 224 (mainline @ 15) 
   at /home/coke/sandbox/perl6-roast-data/niecza/lib/CORE.setting line 4595 (ANON @ 3) 
   at /home/coke/sandbox/perl6-roast-data/niecza/lib/CORE.setting line 4596 (module-CORE @ 576) 
   at /home/coke/sandbox/perl6-roast-data/niecza/lib/CORE.setting line 4596 (mainline @ 3) 
@@ -1703,7 +1655,7 @@ Use of uninitialized value in string context
   at /home/coke/sandbox/perl6-roast-data/niecza/t/spec/S04-phasers/enter-leave.niecza line 108 (ANON @ 1) 
   at /home/coke/sandbox/perl6-roast-data/niecza/t/spec/S04-phasers/enter-leave.niecza line 0 (ANON @ 1) 
   at /home/coke/sandbox/perl6-roast-data/niecza/t/spec/S04-phasers/enter-leave.niecza line 112 (ANON @ 7) 
-  at /home/coke/sandbox/perl6-roast-data/niecza/t/spec/S04-phasers/enter-leave.niecza line 223 (mainline @ 19) 
+  at /home/coke/sandbox/perl6-roast-data/niecza/t/spec/S04-phasers/enter-leave.niecza line 224 (mainline @ 19) 
   at /home/coke/sandbox/perl6-roast-data/niecza/lib/CORE.setting line 4595 (ANON @ 3) 
   at /home/coke/sandbox/perl6-roast-data/niecza/lib/CORE.setting line 4596 (module-CORE @ 576) 
   at /home/coke/sandbox/perl6-roast-data/niecza/lib/CORE.setting line 4596 (mainline @ 3) 
@@ -1714,7 +1666,7 @@ Use of uninitialized value in string context
   at <unknown> line 0 (ExitRunloop @ 0) 
   at /home/coke/sandbox/perl6-roast-data/niecza/t/spec/S04-phasers/enter-leave.niecza line 142 (ANON @ 1) 
   at /home/coke/sandbox/perl6-roast-data/niecza/t/spec/S04-phasers/enter-leave.niecza line 148 (ANON @ 7) 
-  at /home/coke/sandbox/perl6-roast-data/niecza/t/spec/S04-phasers/enter-leave.niecza line 223 (mainline @ 25) 
+  at /home/coke/sandbox/perl6-roast-data/niecza/t/spec/S04-phasers/enter-leave.niecza line 224 (mainline @ 25) 
   at /home/coke/sandbox/perl6-roast-data/niecza/lib/CORE.setting line 4595 (ANON @ 3) 
   at /home/coke/sandbox/perl6-roast-data/niecza/lib/CORE.setting line 4596 (module-CORE @ 576) 
   at /home/coke/sandbox/perl6-roast-data/niecza/lib/CORE.setting line 4596 (mainline @ 3) 
@@ -1725,7 +1677,7 @@ Use of uninitialized value in string context
   at <unknown> line 0 (ExitRunloop @ 0) 
   at /home/coke/sandbox/perl6-roast-data/niecza/t/spec/S04-phasers/enter-leave.niecza line 155 (ANON @ 1) 
   at /home/coke/sandbox/perl6-roast-data/niecza/t/spec/S04-phasers/enter-leave.niecza line 161 (ANON @ 7) 
-  at /home/coke/sandbox/perl6-roast-data/niecza/t/spec/S04-phasers/enter-leave.niecza line 223 (mainline @ 27) 
+  at /home/coke/sandbox/perl6-roast-data/niecza/t/spec/S04-phasers/enter-leave.niecza line 224 (mainline @ 27) 
   at /home/coke/sandbox/perl6-roast-data/niecza/lib/CORE.setting line 4595 (ANON @ 3) 
   at /home/coke/sandbox/perl6-roast-data/niecza/lib/CORE.setting line 4596 (module-CORE @ 576) 
   at /home/coke/sandbox/perl6-roast-data/niecza/lib/CORE.setting line 4596 (mainline @ 3) 
@@ -1736,7 +1688,7 @@ Use of uninitialized value in string context
   at <unknown> line 0 (ExitRunloop @ 0) 
   at /home/coke/sandbox/perl6-roast-data/niecza/t/spec/S04-phasers/enter-leave.niecza line 170 (ANON @ 1) 
   at /home/coke/sandbox/perl6-roast-data/niecza/t/spec/S04-phasers/enter-leave.niecza line 177 (ANON @ 7) 
-  at /home/coke/sandbox/perl6-roast-data/niecza/t/spec/S04-phasers/enter-leave.niecza line 223 (mainline @ 29) 
+  at /home/coke/sandbox/perl6-roast-data/niecza/t/spec/S04-phasers/enter-leave.niecza line 224 (mainline @ 29) 
   at /home/coke/sandbox/perl6-roast-data/niecza/lib/CORE.setting line 4595 (ANON @ 3) 
   at /home/coke/sandbox/perl6-roast-data/niecza/lib/CORE.setting line 4596 (module-CORE @ 576) 
   at /home/coke/sandbox/perl6-roast-data/niecza/lib/CORE.setting line 4596 (mainline @ 3) 
@@ -1748,7 +1700,7 @@ Use of uninitialized value in string context
   at /home/coke/sandbox/perl6-roast-data/niecza/t/spec/S04-phasers/enter-leave.niecza line 185 (ANON @ 1) 
   at /home/coke/sandbox/perl6-roast-data/niecza/t/spec/S04-phasers/enter-leave.niecza line 0 (ANON @ 1) 
   at /home/coke/sandbox/perl6-roast-data/niecza/t/spec/S04-phasers/enter-leave.niecza line 187 (ANON @ 7) 
-  at /home/coke/sandbox/perl6-roast-data/niecza/t/spec/S04-phasers/enter-leave.niecza line 223 (mainline @ 31) 
+  at /home/coke/sandbox/perl6-roast-data/niecza/t/spec/S04-phasers/enter-leave.niecza line 224 (mainline @ 31) 
   at /home/coke/sandbox/perl6-roast-data/niecza/lib/CORE.setting line 4595 (ANON @ 3) 
   at /home/coke/sandbox/perl6-roast-data/niecza/lib/CORE.setting line 4596 (module-CORE @ 576) 
   at /home/coke/sandbox/perl6-roast-data/niecza/lib/CORE.setting line 4596 (mainline @ 3) 
@@ -1757,11 +1709,11 @@ Use of uninitialized value in string context
   at /home/coke/sandbox/perl6-roast-data/niecza/lib/CORE.setting line 1389 (warn @ 5) 
   at /home/coke/sandbox/perl6-roast-data/niecza/lib/CORE.setting line 269 (Mu.Str @ 15) 
   at <unknown> line 0 (ExitRunloop @ 0) 
-  at /home/coke/sandbox/perl6-roast-data/niecza/t/spec/S04-phasers/enter-leave.niecza line 198 (ANON @ 3) 
+  at /home/coke/sandbox/perl6-roast-data/niecza/t/spec/S04-phasers/enter-leave.niecza line 199 (ANON @ 3) 
   at <unknown> line 0 (ExitRunloop @ 0) 
-  at /home/coke/sandbox/perl6-roast-data/niecza/t/spec/S04-phasers/enter-leave.niecza line 199 (ANON @ 6) 
-  at /home/coke/sandbox/perl6-roast-data/niecza/t/spec/S04-phasers/enter-leave.niecza line 199 (ANON @ 11) 
-  at /home/coke/sandbox/perl6-roast-data/niecza/t/spec/S04-phasers/enter-leave.niecza line 223 (mainline @ 33) 
+  at /home/coke/sandbox/perl6-roast-data/niecza/t/spec/S04-phasers/enter-leave.niecza line 200 (ANON @ 6) 
+  at /home/coke/sandbox/perl6-roast-data/niecza/t/spec/S04-phasers/enter-leave.niecza line 200 (ANON @ 11) 
+  at /home/coke/sandbox/perl6-roast-data/niecza/t/spec/S04-phasers/enter-leave.niecza line 224 (mainline @ 33) 
   at /home/coke/sandbox/perl6-roast-data/niecza/lib/CORE.setting line 4595 (ANON @ 3) 
   at /home/coke/sandbox/perl6-roast-data/niecza/lib/CORE.setting line 4596 (module-CORE @ 576) 
   at /home/coke/sandbox/perl6-roast-data/niecza/lib/CORE.setting line 4596 (mainline @ 3) 
@@ -1917,11 +1869,11 @@ Use of uninitialized value in string context
   at /home/coke/sandbox/perl6-roast-data/niecza/lib/CORE.setting line 1389 (warn @ 5) 
   at /home/coke/sandbox/perl6-roast-data/niecza/lib/CORE.setting line 269 (Mu.Str @ 15) 
   at <unknown> line 0 (ExitRunloop @ 0) 
-  at /home/coke/sandbox/perl6-roast-data/niecza/t/spec/S04-phasers/pre-post.niecza line 128 (ANON @ 3) 
+  at /home/coke/sandbox/perl6-roast-data/niecza/t/spec/S04-phasers/pre-post.niecza line 129 (ANON @ 3) 
   at <unknown> line 0 (ExitRunloop @ 0) 
-  at /home/coke/sandbox/perl6-roast-data/niecza/t/spec/S04-phasers/pre-post.niecza line 129 (ANON @ 5) 
-  at /home/coke/sandbox/perl6-roast-data/niecza/t/spec/S04-phasers/pre-post.niecza line 130 (ANON @ 2) 
-  at /home/coke/sandbox/perl6-roast-data/niecza/t/spec/S04-phasers/pre-post.niecza line 130 (ANON @ 7) 
+  at /home/coke/sandbox/perl6-roast-data/niecza/t/spec/S04-phasers/pre-post.niecza line 130 (ANON @ 5) 
+  at /home/coke/sandbox/perl6-roast-data/niecza/t/spec/S04-phasers/pre-post.niecza line 131 (ANON @ 2) 
+  at /home/coke/sandbox/perl6-roast-data/niecza/t/spec/S04-phasers/pre-post.niecza line 131 (ANON @ 7) 
   at /home/coke/sandbox/perl6-roast-data/niecza/t/spec/S04-phasers/pre-post.niecza line 189 (mainline @ 45) 
   at /home/coke/sandbox/perl6-roast-data/niecza/lib/CORE.setting line 4595 (ANON @ 3) 
   at /home/coke/sandbox/perl6-roast-data/niecza/lib/CORE.setting line 4596 (module-CORE @ 576) 
@@ -1933,7 +1885,7 @@ S04-phasers/rvalue.niecza..........................Use of uninitialized value in
   at /home/coke/sandbox/perl6-roast-data/niecza/lib/CORE.setting line 1389 (warn @ 5) 
   at /home/coke/sandbox/perl6-roast-data/niecza/lib/CORE.setting line 269 (Mu.Str @ 15) 
   at <unknown> line 0 (ExitRunloop @ 0) 
-  at /home/coke/sandbox/perl6-roast-data/niecza/t/spec/S04-phasers/rvalue.niecza line 73 (ANON @ 1) 
+  at /home/coke/sandbox/perl6-roast-data/niecza/t/spec/S04-phasers/rvalue.niecza line 72 (ANON @ 1) 
   at <unknown> line 0 (ExitRunloop @ 0) 
    9    0    6    1   16
      1 skipped: Excess arguments to EVAL, used 1 of 2 positionals
@@ -1943,8 +1895,10 @@ S04-statement-modifiers/for.niecza.................Potential difficulties:
 	to force list interpolation, please use either 'for @$v' or 'for $v[]';
 	if you just want item topicalization, use 'given $v' instead at /home/coke/sandbox/perl6-roast-data/niecza/t/spec/S04-statement-modifiers/for.niecza line 60:
 ------> [32m    $a ~= "<$_>" for [33m⏏[31m$v;[0m
+  &r is declared but not used at /home/coke/sandbox/perl6-roast-data/niecza/t/spec/S04-statement-modifiers/for.niecza line 118:
+------> [32mis ((sub r [33m⏏[31m{ "OH HAI" })() for 5), "OH HAI", 'Anon [0m
 
-  18    0    2    0   20
+  19    0    2    0   21
      2 todo   : closure for
 S04-statement-modifiers/given.t....................   6    0    0    0    6
 S04-statement-modifiers/if.niecza..................Potential difficulties:
@@ -2004,12 +1958,12 @@ Use of Nil as a string
   at /home/coke/sandbox/perl6-roast-data/niecza/lib/CORE.setting line 473 (Nil.Str @ 4) 
   at <unknown> line 0 (ExitRunloop @ 0) 
   at /home/coke/sandbox/perl6-roast-data/niecza/t/spec/S04-statements/for.niecza line 527 (ANON @ 5) 
-  at /home/coke/sandbox/perl6-roast-data/niecza/t/spec/S04-statements/for.niecza line 589 (mainline @ 732) 
+  at /home/coke/sandbox/perl6-roast-data/niecza/t/spec/S04-statements/for.niecza line 592 (mainline @ 732) 
   at /home/coke/sandbox/perl6-roast-data/niecza/lib/CORE.setting line 4595 (ANON @ 3) 
   at /home/coke/sandbox/perl6-roast-data/niecza/lib/CORE.setting line 4596 (module-CORE @ 576) 
   at /home/coke/sandbox/perl6-roast-data/niecza/lib/CORE.setting line 4596 (mainline @ 3) 
   at <unknown> line 0 (ExitRunloop @ 0) 
-  71    0    5    1   77
+  72    0    5    1   78
      1 skipped: slice context
      2 todo   : array iterator does not track a growing array
      2 todo   : NYI
@@ -2142,25 +2096,27 @@ S05-grammar/parse_and_parsefile.niecza.............Use of uninitialized value in
   at /home/coke/sandbox/perl6-roast-data/niecza/lib/CORE.setting line 1389 (warn @ 5) 
   at /home/coke/sandbox/perl6-roast-data/niecza/lib/CORE.setting line 269 (Mu.Str @ 15) 
   at <unknown> line 0 (ExitRunloop @ 0) 
-  at /home/coke/sandbox/perl6-roast-data/niecza/t/spec/S05-grammar/parse_and_parsefile.niecza line 15 (mainline @ 11) 
+  at /home/coke/sandbox/perl6-roast-data/niecza/t/spec/S05-grammar/parse_and_parsefile.niecza line 12 (mainline @ 13) 
   at /home/coke/sandbox/perl6-roast-data/niecza/lib/CORE.setting line 4595 (ANON @ 3) 
   at /home/coke/sandbox/perl6-roast-data/niecza/lib/CORE.setting line 4596 (module-CORE @ 576) 
   at /home/coke/sandbox/perl6-roast-data/niecza/lib/CORE.setting line 4596 (mainline @ 3) 
   at <unknown> line 0 (ExitRunloop @ 0) 
-Use of uninitialized value in string context
-  at /home/coke/sandbox/perl6-roast-data/niecza/lib/CORE.setting line 1389 (warn @ 5) 
-  at /home/coke/sandbox/perl6-roast-data/niecza/lib/CORE.setting line 269 (Mu.Str @ 15) 
-  at <unknown> line 0 (ExitRunloop @ 0) 
-  at /home/coke/sandbox/perl6-roast-data/niecza/t/spec/S05-grammar/parse_and_parsefile.niecza line 41 (mainline @ 45) 
+Unhandled exception: Unable to resolve method subparse in type Foo
+  at /home/coke/sandbox/perl6-roast-data/niecza/t/spec/S05-grammar/parse_and_parsefile.niecza line 15 (mainline @ 22) 
   at /home/coke/sandbox/perl6-roast-data/niecza/lib/CORE.setting line 4595 (ANON @ 3) 
   at /home/coke/sandbox/perl6-roast-data/niecza/lib/CORE.setting line 4596 (module-CORE @ 576) 
   at /home/coke/sandbox/perl6-roast-data/niecza/lib/CORE.setting line 4596 (mainline @ 3) 
   at <unknown> line 0 (ExitRunloop @ 0) 
-  10    0    0    2   12
-     2 skipped: Unable to resolve method parsefile in class Foo
-S05-grammar/protoregex.niecza......................  25    0    1    4   30
-     4 skipped: Action method assertion:sym<...> not yet implemented
-     1 todo   : #89
+   3   11    0    0   14
+    11 tests aborted (missing ok/not ok)
+S05-grammar/protoregex.niecza......................Unhandled exception: Unable to resolve method subparse in type Alts
+  at /home/coke/sandbox/perl6-roast-data/niecza/t/spec/S05-grammar/protoregex.niecza line 15 (mainline @ 9) 
+  at /home/coke/sandbox/perl6-roast-data/niecza/lib/CORE.setting line 4595 (ANON @ 3) 
+  at /home/coke/sandbox/perl6-roast-data/niecza/lib/CORE.setting line 4596 (module-CORE @ 576) 
+  at /home/coke/sandbox/perl6-roast-data/niecza/lib/CORE.setting line 4596 (mainline @ 3) 
+  at <unknown> line 0 (ExitRunloop @ 0) 
+   0   30    0    0   30
+    30 tests aborted (missing ok/not ok)
 S05-grammar/signatures.t...........................   2    0    0    0    2
 S05-interpolation/lexicals.t.......................  10    0    0    0   10
 S05-interpolation/regex-in-variable.niecza.........Potential difficulties:
@@ -2174,8 +2130,8 @@ S05-interpolation/regex-in-variable.niecza.........Potential difficulties:
 S05-mass/named-chars.t............................. 431    0    0    0  431
 S05-mass/properties-block.t........................ 670    0    0    0  670
 S05-mass/properties-derived.niecza................. 240    0   16    0  256
-    12 todo   : 
-     4 todo PASSED: 
+     5 todo   : 
+    11 todo PASSED: 
 S05-mass/properties-general.niecza................. 592    0    0   10  602
     10 skipped: No [Lr] property defined
 S05-mass/properties-script.t....................... 361    0    0    0  361
@@ -2188,9 +2144,9 @@ Use of uninitialized value in string context
   at /home/coke/sandbox/perl6-roast-data/niecza/lib/CORE.setting line 1389 (warn @ 5) 
   at /home/coke/sandbox/perl6-roast-data/niecza/lib/CORE.setting line 269 (Mu.Str @ 15) 
   at <unknown> line 0 (ExitRunloop @ 0) 
-  at /home/coke/sandbox/perl6-roast-data/niecza/t/spec/S05-mass/rx.niecza line 2995 (ANON @ 7) 
+  at /home/coke/sandbox/perl6-roast-data/niecza/t/spec/S05-mass/rx.niecza line 2992 (ANON @ 7) 
   at /home/coke/sandbox/perl6-roast-data/niecza/lib/CORE.setting line 3119 (Regex.ACCEPTS @ 10) 
-  at /home/coke/sandbox/perl6-roast-data/niecza/t/spec/S05-mass/rx.niecza line 2995 (mainline @ 2316) 
+  at /home/coke/sandbox/perl6-roast-data/niecza/t/spec/S05-mass/rx.niecza line 2992 (mainline @ 2316) 
   at /home/coke/sandbox/perl6-roast-data/niecza/lib/CORE.setting line 4595 (ANON @ 3) 
   at /home/coke/sandbox/perl6-roast-data/niecza/lib/CORE.setting line 4596 (module-CORE @ 576) 
   at /home/coke/sandbox/perl6-roast-data/niecza/lib/CORE.setting line 4596 (mainline @ 3) 
@@ -2210,8 +2166,8 @@ Use of uninitialized value in string context
      1 todo   : allows them
      2 todo   : :: issues
      1 todo   : undefined capture
-     3 todo   : Unable to resolve method cntrl in class Cursor
      1 todo PASSED: 
+     3 todo PASSED: Unable to resolve method cntrl in class Cursor
 S05-mass/stdrules.niecza........................... 183    0    0    3  186
      3 skipped: <at>
 S05-match/arrayhash.niecza.........................   4    0    4    0    8
@@ -2240,9 +2196,9 @@ Use of uninitialized value in string context
   at /home/coke/sandbox/perl6-roast-data/niecza/lib/CORE.setting line 1389 (warn @ 5) 
   at /home/coke/sandbox/perl6-roast-data/niecza/lib/CORE.setting line 269 (Mu.Str @ 15) 
   at <unknown> line 0 (ExitRunloop @ 0) 
-  at /home/coke/sandbox/perl6-roast-data/niecza/t/spec/S05-match/capturing-contexts.niecza line 89 (ANON @ 7) 
+  at /home/coke/sandbox/perl6-roast-data/niecza/t/spec/S05-match/capturing-contexts.niecza line 88 (ANON @ 7) 
   at /home/coke/sandbox/perl6-roast-data/niecza/lib/CORE.setting line 3119 (Regex.ACCEPTS @ 10) 
-  at /home/coke/sandbox/perl6-roast-data/niecza/t/spec/S05-match/capturing-contexts.niecza line 89 (mainline @ 28) 
+  at /home/coke/sandbox/perl6-roast-data/niecza/t/spec/S05-match/capturing-contexts.niecza line 88 (mainline @ 28) 
   at /home/coke/sandbox/perl6-roast-data/niecza/lib/CORE.setting line 4595 (ANON @ 3) 
   at /home/coke/sandbox/perl6-roast-data/niecza/lib/CORE.setting line 4596 (module-CORE @ 576) 
   at /home/coke/sandbox/perl6-roast-data/niecza/lib/CORE.setting line 4596 (mainline @ 3) 
@@ -2284,7 +2240,7 @@ S05-metachars/line-anchors.t.......................  19    0    0    0   19
 S05-metachars/newline.t............................  15    0    0    0   15
 S05-metachars/tilde.niecza.........................  15    0    0   11   26
     11 skipped: Unable to resolve method FAILGOAL in class Cursor
-S05-metasyntax/angle-brackets.niecza...............  63    0    3   24   90
+S05-metasyntax/angle-brackets.niecza...............  64    0    3   24   91
     11 skipped: Action method assertion:sym<*> not yet implemented
      1 skipped: Anonymous submatch returned a Str instead of a Cursor, violating the submatch protocol
      2 skipped: Action method assertion:sym<~~>
@@ -2416,7 +2372,7 @@ S05-modifier/ignorecase.niecza.....................  20    0    4    0   24
      1 todo   : NYI
 S05-modifier/pos.niecza............................  36    0    0    4   40
      4 skipped: :i
-S05-modifier/sigspace.t............................  11    1    0    0   12
+S05-modifier/sigspace.t............................  14    2    0    0   16
 S05-substitution/match.t...........................  13    0    0    0   13
 S05-substitution/subst.niecza......................Potential difficulties:
   $x is declared but not used at /home/coke/sandbox/perl6-roast-data/niecza/t/spec/S05-substitution/subst.niecza line 240:
@@ -4005,7 +3961,57 @@ Use of uninitialized value in string context
      4 skipped: Pathed definitions require our scope
      3 todo   : 
                                                    pass fail todo skip plan
-S13-overloading/metaoperators.t....................   9    0    0    0    9
+S13-overloading/metaoperators.t....................[31m===[0mSORRY![31m===[0m
+
+$a has already been used as a non-placeholder in the surrounding sub block,
+  so you will confuse the reader if you suddenly declare $^a here at /home/coke/sandbox/perl6-roast-data/niecza/t/spec/S13-overloading/metaoperators.t line 36:
+------> [32m    sub foo { [33m⏏[31m$^a ~ $^b };[0m
+
+Unhandled exception: System.Collections.Generic.KeyNotFoundException: The given key was not present in the dictionary.
+  at System.Collections.Generic.Dictionary`2[System.String,Niecza.LexInfo].get_Item (System.String key) [0x00000] in <filename unknown>:0 
+  at Niecza.CLRBackend.DowncallReceiver.param_new (System.Object[] args) [0x00000] in <filename unknown>:0 
+  at Niecza.CLRBackend.DowncallReceiver.Call (System.Object[] args) [0x00000] in <filename unknown>:0 
+  at Niecza.CLRBackend.DowncallReceiver.get_Item (System.Object i) [0x00000] in <filename unknown>:0 
+  at /home/coke/sandbox/perl6-roast-data/niecza/src/NieczaBackendDotnet.pm6 line 75 (downcall @ 4) 
+  at /home/coke/sandbox/perl6-roast-data/niecza/src/NieczaBackendDotnet.pm6 line 135 (ANON @ 12) 
+  at /home/coke/sandbox/perl6-roast-data/niecza/src/NieczaBackendDotnet.pm6 line 140 (StaticSub.signature @ 8) 
+  at /home/coke/sandbox/perl6-roast-data/niecza/src/NieczaBackendDotnet.pm6 line 147 (StaticSub.set_signature @ 12) 
+  at /home/coke/sandbox/perl6-roast-data/niecza/src/STD.pm6 line 5244 (ANON @ 12) 
+  at /home/coke/sandbox/perl6-roast-data/niecza/src/STD.pm6 line 5247 (STD.getsig @ 6) 
+  at /home/coke/sandbox/perl6-roast-data/niecza/src/STD.pm6 line 1849 (P6.routine_def @ 68) 
+  at /home/coke/sandbox/perl6-roast-data/niecza/src/STD.pm6 line 1796 (P6.routine_declarator:sub @ 5) 
+  at /home/coke/sandbox/perl6-roast-data/niecza/src/STD.pm6 line 0 (STD.routine_declarator @ 3) 
+  at /home/coke/sandbox/perl6-roast-data/niecza/src/STD.pm6 line 2017 (P6.term:routine_declarator @ 3) 
+  at /home/coke/sandbox/perl6-roast-data/niecza/src/STD.pm6 line 0 (STD.term @ 3) 
+  at /home/coke/sandbox/perl6-roast-data/niecza/src/STD.pm6 line 2011 (P6.termish @ 15) 
+  at /home/coke/sandbox/perl6-roast-data/niecza/src/STD.pm6 line 4555 (ANON @ 10) 
+  at /home/coke/sandbox/perl6-roast-data/niecza/src/STD.pm6 line 4663 (STD.EXPR @ 25) 
+  at /home/coke/sandbox/perl6-roast-data/niecza/src/STD.pm6 line 1351 (P6.statement @ 13) 
+  at /home/coke/sandbox/perl6-roast-data/niecza/src/STD.pm6 line 1287 (P6.statementlist @ 16) 
+  at /home/coke/sandbox/perl6-roast-data/niecza/src/STD.pm6 line 1233 (P6.blockoid @ 7) 
+  at /home/coke/sandbox/perl6-roast-data/niecza/src/STD.pm6 line 1196 (P6.pblock @ 64) 
+  at /home/coke/sandbox/perl6-roast-data/niecza/src/STD.pm6 line 3455 (P6.circumfix:sym<{ }> @ 3) 
+  at /home/coke/sandbox/perl6-roast-data/niecza/src/STD.pm6 line 0 (STD.circumfix @ 3) 
+  at /home/coke/sandbox/perl6-roast-data/niecza/src/STD.pm6 line 2020 (P6.term:circumfix @ 3) 
+  at /home/coke/sandbox/perl6-roast-data/niecza/src/STD.pm6 line 0 (STD.term @ 3) 
+  at /home/coke/sandbox/perl6-roast-data/niecza/src/STD.pm6 line 2011 (P6.termish @ 15) 
+  at /home/coke/sandbox/perl6-roast-data/niecza/src/STD.pm6 line 4555 (ANON @ 10) 
+  at /home/coke/sandbox/perl6-roast-data/niecza/src/STD.pm6 line 4663 (STD.EXPR @ 25) 
+  at /home/coke/sandbox/perl6-roast-data/niecza/src/STD.pm6 line 1351 (P6.statement @ 13) 
+  at /home/coke/sandbox/perl6-roast-data/niecza/src/STD.pm6 line 1287 (P6.statementlist @ 16) 
+  at /home/coke/sandbox/perl6-roast-data/niecza/src/STD.pm6 line 1158 (P6.comp_unit @ 9) 
+  at /home/coke/sandbox/perl6-roast-data/niecza/src/STD.pm6 line 101 (STD.TOP @ 11) 
+  at /home/coke/sandbox/perl6-roast-data/niecza/boot/lib/CORE.setting line 3018 (Grammar.parse @ 5) 
+  at /home/coke/sandbox/perl6-roast-data/niecza/src/NieczaFrontendSTD.pm6 line 281 (NieczaFrontendSTD.parse @ 70) 
+  at /home/coke/sandbox/perl6-roast-data/niecza/src/NieczaCompiler.pm6 line 34 (NieczaCompiler.compile @ 18) 
+  at /home/coke/sandbox/perl6-roast-data/niecza/src/NieczaCompiler.pm6 line 60 (NieczaCompiler.compile_file @ 8) 
+  at /home/coke/sandbox/perl6-roast-data/niecza/src/niecza line 165 (mainline @ 144) 
+  at /home/coke/sandbox/perl6-roast-data/niecza/boot/lib/CORE.setting line 4327 (ANON @ 3) 
+  at /home/coke/sandbox/perl6-roast-data/niecza/boot/lib/CORE.setting line 4328 (module-CORE @ 582) 
+  at /home/coke/sandbox/perl6-roast-data/niecza/boot/lib/CORE.setting line 4328 (mainline @ 3) 
+  at <unknown> line 0 (ExitRunloop @ 0) 
+   0   10    0    0   10
+    10 tests aborted (missing ok/not ok)
 S13-overloading/operators.t........................   4    0    0    0    4
 S13-overloading/typecasting-long.niecza............Potential difficulties:
   @slice is declared but not used at /home/coke/sandbox/perl6-roast-data/niecza/t/spec/S13-overloading/typecasting-long.niecza line 34:
@@ -4124,8 +4130,8 @@ S29-context/eval.niecza............................Potential difficulties:
 S29-context/exit-in-if.t...........................   1    0    0    0    1
 S29-context/exit.t.................................   1    2    0    0    3
 S29-conversions/hash.t.............................   8    0    0    0    8
-S29-conversions/ord_and_chr.niecza................. 250    0    1    5  256
-     4 skipped: chr handling of invalid code-points
+S29-conversions/ord_and_chr.niecza................. 250    0    1    6  257
+     5 skipped: chr handling of invalid code-points
      1 skipped: multi-arg variants of chr not in place yet
      1 todo   : 
                                                    pass fail todo skip plan
@@ -4344,7 +4350,7 @@ S32-list/map.niecza................................  45    0    2    6   53
      1 todo   : 
      1 todo   : https://github.com/sorear/niecza/issues/182
 S32-list/minmax.t..................................  55    0    0    0   55
-S32-list/pick.niecza...............................  46    0    0    1   47
+S32-list/pick.niecza...............................  49    7    0    1   57
      1 skipped: ().pick === Nil
 S32-list/reduce.niecza.............................Potential difficulties:
   @array is declared but not used at /home/coke/sandbox/perl6-roast-data/niecza/t/spec/S32-list/reduce.niecza line 28:
@@ -4366,7 +4372,7 @@ Use of uninitialized value in numeric context
 S32-list/reverse.niecza............................  16    0    0    5   21
      1 skipped: Unable to resolve method reverse in class Parcel
      4 skipped: Iterable NYI
-S32-list/roll.niecza...............................  38    0    0    2   40
+S32-list/roll.niecza...............................  41    5    0    2   48
      1 skipped: That's not the right way to spawn another Niecza
      1 skipped: .roll on empty list
 S32-list/sort.niecza...............................  24    0    4    4   32
@@ -5988,47 +5994,70 @@ Use of uninitialized value in string context
 ----------------
 "Synopsis", "pass","fail","todo","skip","plan","spec"
 "S01",           0,     0,     0,     0,     0,    61
-"S02",        3173,    17,   121,   385,  3696,  4480
-"S03",        3677,     0,   198,   407,  4282,  4668
-"S04",         801,     0,    35,    60,   896,  1040
-"S05",        4148,     8,    97,   227,  4480,  5847
+"S02",        3015,   274,   120,   344,  3753,  4613
+"S03",        3460,   205,   198,   404,  4267,  4659
+"S04",         804,     0,    34,    60,   898,  1043
+"S05",        4120,    50,    96,   221,  4487,  5854
 "S06",         781,     1,    58,   162,  1002,  1292
 "S07",           0,     0,     0,     0,     0,     0
 "S09",          66,     0,     1,     8,    75,   200
 "S10",          35,     0,     5,    19,    59,   128
-"S11",           0,     0,     0,     0,     0,   139
-"S12",         783,     8,    64,   177,  1032,  1412
-"S13",          31,     0,     1,    10,    42,    80
-"S14",         168,     0,     1,    11,   180,   328
+"S11",           0,     0,     0,     0,     0,   147
+"S12",         783,     8,    64,   177,  1032,  1415
+"S13",          22,    10,     1,    10,    43,    81
+"S14",         168,     0,     1,    11,   180,   329
+"S15",           0,     0,     0,     0,     0,   283
 "S16",         185,     0,     5,    41,   231,   302
-"S17",           0,     0,     0,     0,     0,   210
+"S17",           0,     0,     0,     0,     0,   415
 "S19",           4,     0,     0,     0,     4,     4
 "S24",           1,     0,     0,     0,     1,    88
-"S26",           0,     0,     0,     0,     0,   266
+"S26",           0,     0,     0,     0,     0,   268
 "S28",           6,     0,     1,     0,     7,    13
-"S29",         304,     2,     2,    10,   318,   350
-"S32",        6754,     0,   137,   285,  7176,  7051
-"int",         464,    12,    22,    27,   525,   575
-"total",     21381,    48,   748,  1829, 24006, 28534
+"S29",         304,     2,     2,    11,   319,   351
+"S32",        6760,    12,   137,   285,  7194,  7080
+"int",         464,    12,    22,    27,   525,   927
+"ros",           0,     0,     0,     0,     0,     2
+"total",     20978,   574,   745,  1780, 24077, 29555
 ----------------
 Failure summary:
+S02-lexical-conventions/unspace.niecza aborted 86 test(s)
 S02-literals/quoting.niecza 156 - \c followed by non-number
+S02-literals/quoting.niecza 159 - Escaped opener produces the opener unescaped
 S02-names-vars/varnames.niecza aborted 14 test(s)
-S02-types/baghash.niecza 72 - BagHash.kv returns list of keys and values
+S02-types/baghash.niecza aborted 171 test(s)
 S02-types/sethash.niecza 41 - SetHash.kv returns list of keys and values
+S03-metaops/hyper.niecza aborted 203 test(s)
+S03-operators/value_equivalence.niecza 33 - === on scalar references (1-3)
+S03-operators/value_equivalence.niecza 55 - === on anonymous scalar references (2)
 S05-grammar/action-stubs.niecza 19 - $/ availiable
 S05-grammar/methods.t 6 - duplicate methods err sanely
+S05-grammar/parse_and_parsefile.niecza aborted 11 test(s)
+S05-grammar/protoregex.niecza aborted 30 test(s)
 S05-mass/rx.niecza 424 - sigspace (:s)
 S05-mass/rx.niecza 425 - sigspace (:s)
 S05-mass/rx.niecza 429 - sigspace (:s)
 S05-mass/rx.niecza 434 - sigspace (:sigspace)
 S05-mass/rx.niecza 437 - sigspace (:sigspace)
 S05-modifier/sigspace.t 10 - inline :s doesn't imply <.ws> immediately (-)
+S05-modifier/sigspace.t 13 - Semantics of sigspace after ^
 S06-signature/errors.niecza 11
 S12-methods/private.niecza aborted 7 test(s)
 S12-methods/topic.t 1 - $_ is not set in methods...
+S13-overloading/metaoperators.t aborted 10 test(s)
 S29-context/exit.t 2 - exit 5; works
 S29-context/exit.t 3 - try-block does not catch exit exceptions
+S32-list/pick.niecza 48 - simple pick on Enum type works
+S32-list/pick.niecza 49 - one pick on Enum type works
+S32-list/pick.niecza 50 - all pick on Enum type works
+S32-list/pick.niecza 51 - too many pick on Enum type works
+S32-list/pick.niecza 54 - one pick on Enum is sane
+S32-list/pick.niecza 55 - all pick on Enum is sane
+S32-list/pick.niecza 56 - too many pick on Enum is sane
+S32-list/roll.niecza 41 - simple roll on Enum type works
+S32-list/roll.niecza 42 - one roll on Enum type works
+S32-list/roll.niecza 45 - simple roll on Enum is sane
+S32-list/roll.niecza 46 - one roll on Enum is sane
+S32-list/roll.niecza 47 - too many roll on Enum is sane
 integration/role-composition-vs-attribute.t aborted 10 test(s)
 integration/weird-errors.niecza 10 - weird code that used to parsefail rakudo
 integration/weird-errors.niecza 12 - fails correctly
