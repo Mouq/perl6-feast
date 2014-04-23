@@ -67,6 +67,9 @@ for dir("log")[2,4..*] -> $log-path {
         when m[ ^ (\s+ $<num>=\d+) { $0.comb == 6 } ' tests aborted (missing ok/not ok)' $ ] {
             add-result $_;
         }
+        when m[^ 'Failure summary:' $] {
+            $failure-summary = True;
+        }
     }
     $log-fh.close
 }
