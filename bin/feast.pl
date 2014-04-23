@@ -26,20 +26,20 @@ for dir("log")[0,2..*] -> $log-path {
     @impls.push: $impl;
 
     my $log-fh = $log-path.open;
-    my $*line = 0; # Rakudo's IO.ins tends to display total line count
+    my $line = 0; # Rakudo's IO.ins tends to display total line count
 
-    my (Str $*section, Str $*test-file, Str $*test-dir);
+    my (Str $section, Str $test-file, Str $test-dir);
     my Bool $failure-summary; # (have we reached the failure summary yet?)
 
     my sub add-result ($r) {
-        %dat{$*section}{$*test-dir}{$*test-file}{$impl}.push:
-            <a>.xml: :class<ref>:href("%github<roast-data>$log-path#L$*line"),
+        %dat{$section}{$test-dir}{$test-file}{$impl}.push:
+            <a>.xml: :class<ref>:href("%github<roast-data>$log-path#L$line"),
                 <div>.xml: :class<result>,
                     xml-encode $r;
     }
 
     for $log-fh.lines {
-        $*line++;
+        $line++;
         when m[
             ^
             (
@@ -49,10 +49,10 @@ for dir("log")[0,2..*] -> $log-path {
             '.' [ $impl | t ]
             (.*)
         ] {
-            ($*test-dir, $*test-file) = split '/', ~$0;
-            $*test-file ~= '.t';
-            $*section   = $0.comb: /^<ident>+/;
-            say "Processing {$impl}'s $*section at $*test-file";
+            ($test-dir, $test-file) = split '/', ~$0;
+            $test-file ~= '.t';
+            $section   = $0.comb: /^<ident>+/;
+            say "Processing $impl\'s $section at $test-file";
             if $failure-summary {
                 add-result 'Failed test #'~$1;
             }
