@@ -145,15 +145,11 @@ for %dat.sort».kv -> $sect, %testfiles {
         <div>.xml(@sect-descs.shift, :class<desc off>),
         |%testfiles.sort».kv.map: -> $testfile, %res {
             <div>.xml: :class<file>,
-                <div>.xml(:class<desc>,
-                    ("$_[0].split('-')[1..*].wordcase(): <code>$_[1]\</code>" given $testfile.split('/'))
-                ),
-                # Each test file has its own set of results
-                # which we classify by implementation:
-                #<a>.xml(
-                #    :href("%github<roast>$testfile"),
-                #    <div>.xml: :class<cell>, $testfile
-                #),
+                <div>.xml(:class<desc>, (
+                    "$_[0].split('-')[1..*].wordcase(): "
+                     ~ <code>.xml: <a>.xml: :href("%github<roast>$testfile"), $_[1]
+                    given $testfile.split('/')
+                )),
                 %res.kv.map: -> $fudge, @impls {
                     <div>.xml: :class(
                         "fudge " ~ (
