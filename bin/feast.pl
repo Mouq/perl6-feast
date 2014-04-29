@@ -3,9 +3,9 @@ use v6;
 use MONKEY_TYPING;
 augment class Str {
     method xml ($name : *@content, *%attrs) {
-        ~ "<$name"~%attrs.kv.map({" $^a='$^b'"}).join~">\n"
-        ~ @content.map(*~"\n").join.indent(4)
-        ~ "</$name>"
+        [~] "<$name"~%attrs.kv.map({" $^a='$^b'"}).join~">",
+            @content.flat.map(*~"\n"),
+            "</$name>"
     }
 }
 sub xml-encode ($_) { .trans(/\</ => '&lt', /\&/ => '&amp;') }
@@ -20,20 +20,20 @@ my Str @impls;
 # Grab each file in log dir, extract
 # the skips and todos for each file,
 # and sort? them???? and display.
-for dir("log")[0,2..*] -> $log-path {
+for dir("log")[2..*] -> $log-path {
     my $impl = $log-path.parts<basename>.trans: /'_summary.out' $/ => '';
     say "Collecting the charred remains of $impl";
-    @impls.push: $impl;
+    my $impl-num = @impls.push: $impl;
 
     my $log-fh = $log-path.open;
     my $line = 0; # Rakudo's IO.ins tends to display total line count
 
-    my (Str $section, Str $test-file, Str $test-dir);
+    my (Str $section, Str $test-file);
     my Bool $failure-summary; # (have we reached the failure summary yet?)
 
     my sub add-result ($r) {
-        %dat{$section}{$test-dir}{$test-file}{$impl}.push:
-            <a>.xml: :class<ref>:href("%github<roast-data>$log-path#L$line"),
+        %dat{$section}{$test-file}.push:
+            $impl-num => <a>.xml: :class<ref>:href("%github<roast-data>$log-path#L$line"),
                 <div>.xml: :class<result>,
                     xml-encode $r;
     }
@@ -49,7 +49,7 @@ for dir("log")[0,2..*] -> $log-path {
             '.' [ $impl | t ]
             (.*)
         ] {
-            ($test-dir, $test-file) = split '/', ~$0;
+            ($test-file) = split '/', ~$0;
             $test-file ~= '.t';
             $section   = $0.comb: /^<ident>+/;
             say "Processing $impl\'s $section at $test-file";
@@ -85,11 +85,14 @@ $feast.say: q:to[EOHTML];
         <link href='http://fonts.googleapis.com/css?family=Marcellus' rel='stylesheet' type='text/css'>
         <link href='http://fonts.googleapis.com/css?family=Marcellus+SC' rel='stylesheet' type='text/css'>
         <link href='http://fonts.googleapis.com/css?family=Anonymous+Pro:400,400italic&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
-        <link href='feast.css' rel='stylesheet' type='text/css'>
+        <link href='feast-new.css' rel='stylesheet' type='text/css'>
+        <script type='text/javascript' src='https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js'></script>
+        <script type='text/javascript' src='feast-new.js'></script>
         <title>Feast: Roasted Perl 6</title>
     </head>
     <body>
-    <h1 class='title'>Feast: Roasted Perl 6</h1>
+    <h1 class='title'>Feast</h1>
+    <h3 class='subtitle'>Roasted Perl 6</h3>
     EOHTML
 
 END {
@@ -102,35 +105,27 @@ END {
 
 
 $feast.say: <div>.xml: :class<impls>,
-    <div>.xml(:class<cell>, '&nbsp;'),
-    |('&nbsp;',@impls).map: {
-        <div>.xml: :class«cell {$_.trans: '.'=>'-'}», $_.trans('.' => ' ').wordcase
+    @impls.map: {
+        <div>.xml: :class<impl>, $_.trans('.' => ' ').wordcase
     }
 
-for %dat.sort».kv -> $sect, %testdirs {
+for %dat.sort».kv -> $sect, %testfiles {
     # Split the tests by major section (S01, S02, etc.):
     say "Recording $sect";
-    $feast.say: <div>.xml: :class<section>,
-        <div>.xml($sect.tc, :class<title>),
-        <div>.xml: :class<section-body>, |%testdirs.sort».kv.map: -> $testdir, %testfiles {
-            # Each test directory (S01-perl-5-integration,etc.)
-            # has its own sub-section:
-            <div>.xml: :class<directory>,
-                <div>.xml(:class<title>, $testdir.split('-')[1..*].Str.wordcase),
+    $feast.say: <div>.xml: :class<synopsis off>,
+        <div>.xml($sect.tc, :class<desc>),
+        |%testfiles.sort».kv.map: -> $testfile, @res {
+            <div>.xml: :class<file off>,
+                <div>.xml(:class<desc>, $testfile.split('-')[1..*].Str.wordcase),
                 # Each test file has its own set of results
                 # which we classify by implementation:
-                |%testfiles.sort».kv.map: -> $testfile, %res {
-                    %res{$_} //= '&nbsp;' for @impls;
-                    <a>.xml(
-                        :href("%github<roast>$testdir/$testfile"),
-                        <div>.xml: :class<cell>, $testfile
-                    ),
-                    (@impls.map: -> $impl {
-                        %res{$impl}.map: {
-                            <div>.xml: :class«cell {$impl.trans: '.'=>'-'}», $_
-                        }
-                    }),
-                    '<br>'
+                #<a>.xml(
+                #    :href("%github<roast>$testfile"),
+                #    <div>.xml: :class<cell>, $testfile
+                #),
+                @res».kv.map: -> $impl, $fudge {
+                    <div>.xml: :class«fudge impl{$impl}»,
+                    $fudge
                 }
         }
 }
