@@ -18,13 +18,12 @@ say "Preparing roasted implementations";
 my %dat;
 my Str @impls;
 # Grab each file in log dir, extract
-# the skips and todos for each file,
-# and sort? them???? and display.
+# the skips, todos, etc. for each file.
 for dir("log")[2..*] -> $log-path {
     my $impl = $log-path.parts<basename>.trans: /'_summary.out' $/ => '';
     say "Collecting the charred remains of $impl";
     @impls.push: $impl;
-    my $impl-num = @impls.end;
+    my $impl-num = +@impls;
 
     my $log-fh = $log-path.open;
     my $line = 0; # Rakudo's IO.ins tends to display total line count
@@ -32,11 +31,13 @@ for dir("log")[2..*] -> $log-path {
     my (Str $section, Str $test-file);
     my Bool $failure-summary; # (have we reached the failure summary yet?)
 
-    my sub add-result ($r) {
+    my sub add-result ($desc, $r) {
         %dat{$section}{$test-file}.push:
-            $impl-num => <a>.xml: :class<ref>:href("%github<roast-data>$log-path#L$line"),
-                <div>.xml: :class<result>,
-                    xml-encode $r;
+            $impl-num => [~]
+                <div>.xml(:class<desc>, xml-encode $desc ),
+                <a>.xml: :class<ref>:href("%github<roast-data>$log-path#L$line"),
+                    <div>.xml: :class<test>,
+                        xml-encode $r;
     }
 
     for $log-fh.lines {
@@ -50,23 +51,22 @@ for dir("log")[2..*] -> $log-path {
             '.' [ $impl | t ]
             (.*)
         ] {
-            ($test-file) = split '/', ~$0;
-            $test-file ~= '.t';
+            $test-file = $0~'.t';
             $section   = $0.comb: /^<ident>+/;
             say "Processing $impl\'s $section at $test-file";
             if $failure-summary {
-                add-result 'Failed test #'~$1;
+                add-result 'Failed test',~$1;
             }
         }
         # Currently very simple, might improve later
         when m[ ^ (\s+ $<num>=\d+) { $0.comb == 6 } ' skipped: ' (.*) $ ] {
-            add-result $_;
+            add-result ~$1, "($0 skipped)";
         }
         when m[ ^ (\s+ $<num>=\d+) { $0.comb == 6 } ' todo   : ' (.*) $ ] {
-            add-result $_;
+            add-result ~$1, "($0 todo)";
         }
         when m[ ^ (\s+ $<num>=\d+) { $0.comb == 6 } ' tests aborted (missing ok/not ok)' $ ] {
-            add-result $_;
+            add-result $_, "($0 aborted)";
         }
         when m[^ 'Failure summary:' $] {
             $failure-summary = True;
@@ -114,18 +114,20 @@ for %dat.sort».kv -> $sect, %testfiles {
     # Split the tests by major section (S01, S02, etc.):
     say "Recording $sect";
     $feast.say: <div>.xml: :class<synopsis off>,
-        <div>.xml($sect.tc, :class<desc>),
+        <div>.xml($sect.tc, :class<desc off>),
         |%testfiles.sort».kv.map: -> $testfile, @res {
             <div>.xml: :class<file off>,
-                <div>.xml(:class<desc>, $testfile.split('-')[1..*].Str.wordcase),
+                <div>.xml(:class<desc off>,
+                    ("$_[0].split('-')[1..*].wordcase(): <code>$_[1]\</code>" given $testfile.split('/'))
+                ),
                 # Each test file has its own set of results
                 # which we classify by implementation:
                 #<a>.xml(
                 #    :href("%github<roast>$testfile"),
                 #    <div>.xml: :class<cell>, $testfile
                 #),
-                @res».kv.map: -> $impl, $fudge {
-                    <div>.xml: :class«fudge impl{$impl}»,
+                @res».kv.map: -> $impl-num, $fudge {
+                    <div>.xml: :class("fudge impl$impl-num"),
                     $fudge
                 }
         }
