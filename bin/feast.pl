@@ -32,12 +32,14 @@ for dir("log")[2..*] -> $log-path {
     my Bool $failure-summary; # (have we reached the failure summary yet?)
 
     my sub add-result ($desc, $r) {
-        %dat{$section}{$test-file}.push:
-            $impl-num => [~]
-                <div>.xml(:class<desc>, xml-encode $desc ),
-                <a>.xml: :class<ref>:href("%github<roast-data>$log-path#L$line"),
+        # Throw the html into a hash in a hacky attempt to merge
+        # identical failures
+        %dat{$section}{$test-file}{
+            [~] <div>.xml(:class<desc>, xml-encode $desc ),
+            #<a>.xml: :class<ref>:href("%github<roast-data>$log-path#L$line"),
                     <div>.xml: :class<test>,
-                        xml-encode $r;
+                        xml-encode $r
+        }.push: $impl-num;
     }
 
     for $log-fh.lines {
@@ -139,7 +141,7 @@ for %dat.sort».kv -> $sect, %testfiles {
     say "Recording $sect";
     $feast.say: <div>.xml: :class<synopsis off>,
         <div>.xml(@sect-descs.shift, :class<desc off>),
-        |%testfiles.sort».kv.map: -> $testfile, @res {
+        |%testfiles.sort».kv.map: -> $testfile, %res {
             <div>.xml: :class<file>,
                 <div>.xml(:class<desc>,
                     ("$_[0].split('-')[1..*].wordcase(): <code>$_[1]\</code>" given $testfile.split('/'))
@@ -150,8 +152,14 @@ for %dat.sort».kv -> $sect, %testfiles {
                 #    :href("%github<roast>$testfile"),
                 #    <div>.xml: :class<cell>, $testfile
                 #),
-                @res».kv.map: -> $impl-num, $fudge {
-                    <div>.xml: :class("fudge impl$impl-num"),
+                %res.kv.map: -> $fudge, @impls {
+                    <div>.xml: :class(
+                        "fudge " ~ (
+                            (@impls>1 and [==] @impls.kv.map({$^v-$^i}))
+                            ?? "impl@impls[0]_@impls[*-1]"
+                            !! @impls.fmt("impl%d")
+                        )
+                    ),
                     $fudge
                 }
         }
