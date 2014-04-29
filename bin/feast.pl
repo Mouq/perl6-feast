@@ -103,7 +103,7 @@ die "@sect-descs has too many or too few test directories.
 Please compare:\n", %dat.keys.join("\n") if %dat != @sect-descs;
 
 say "Writing";
-my $feast = open 'feast.html', :w;
+my $feast = open 'index.html', :w;
 
 $feast.say: q:to[EOHTML];
     <!doctype html>
