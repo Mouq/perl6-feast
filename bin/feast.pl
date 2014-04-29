@@ -60,13 +60,13 @@ for dir("log")[2..*] -> $log-path {
         }
         # Currently very simple, might improve later
         when m[ ^ (\s+ $<num>=\d+) { $0.comb == 6 } ' skipped: ' (.*) $ ] {
-            add-result ~$1, "($0 skipped)";
+            add-result ~$1, "($0.Int() skipped)";
         }
         when m[ ^ (\s+ $<num>=\d+) { $0.comb == 6 } ' todo   : ' (.*) $ ] {
-            add-result ~$1, "($0 todo)";
+            add-result ~$1, "($0.Int() todo)";
         }
         when m[ ^ (\s+ $<num>=\d+) { $0.comb == 6 } ' tests aborted (missing ok/not ok)' $ ] {
-            add-result $_, "($0 aborted)";
+            add-result $_, "($0.Int() aborted)";
         }
         when m[^ 'Failure summary:' $] {
             $failure-summary = True;
@@ -98,6 +98,7 @@ $feast.say: q:to[EOHTML];
 
 END {
     $feast.say: qq:to[EOHTML];
+        <footer>This page generated at: {DateTime.now}</footer>
         </body>
         </html>
         EOHTML
@@ -139,8 +140,8 @@ for %dat.sort».kv -> $sect, %testfiles {
     $feast.say: <div>.xml: :class<synopsis off>,
         <div>.xml(@sect-descs.shift, :class<desc off>),
         |%testfiles.sort».kv.map: -> $testfile, @res {
-            <div>.xml: :class<file off>,
-                <div>.xml(:class<desc off>,
+            <div>.xml: :class<file>,
+                <div>.xml(:class<desc>,
                     ("$_[0].split('-')[1..*].wordcase(): <code>$_[1]\</code>" given $testfile.split('/'))
                 ),
                 # Each test file has its own set of results

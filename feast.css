@@ -47,15 +47,14 @@ body > .subtitle {
     border-bottom: 2px dotted;
     margin: 3px;
 }
-.desc:hover { background-color: grey; color: white; } 
-.desc:hover::before { color: red; } 
 .desc::before  {
     content: " ⊕ "; /* em-spaces */
     padding: -0.2em;
     color: blue;
 }
-.desc.on::before  { content: " ⊕ "; color: blue; }
 .desc.off::before { content: " ⊖ "; color: green;  }
+.desc:hover { background-color: grey; color: white; }
+.desc:hover::before { color: yellow; }
 .synopsis > .desc {
     font-family: 'Marcellus SC', sans-serif;
     font-size: 1.8em;
@@ -104,3 +103,9 @@ body > .subtitle {
 .off > .desc { display: block }
 .off > .desc * { display: inline }
 .on *  { display: default }
+
+footer {
+    margin-top: 3em;
+    font-style: italic;
+    text-align: right;
+}
