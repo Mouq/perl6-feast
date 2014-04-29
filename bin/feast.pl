@@ -110,11 +110,34 @@ $feast.say: <div>.xml: :class<impls>,
         <div>.xml: :class<impl>, $_.trans('.' => ' ').wordcase
     }
 
+my @sect-descs =
+    'S01: Overview',
+    'S02: Bits and Pieces',
+    'S03: Summary of Perl 6 Operators',
+    'S04: Blocks and Statements',
+    'S05: Regexes and Rules',
+    'S06: Subroutines',
+    'S09: Data Structures',
+    'S10: Packages',
+    'S11: Compilation Units',
+    'S12: Objects',
+    'S13: Overloading',
+    'S14: Roles and Parametric Types',
+    'S16: IO / User / Group',
+    'S17: Concurrency',
+    'S19: Compiling',
+    'S24: Command line interface',
+    'S26: Introspection',
+    'S28: Calling foreign code',
+    'S29: Distributions, Recommendations, Delivery and Installation',
+    'S32: Security',
+    'Integration tests',
+    'Rosetta Code tests';
 for %dat.sort».kv -> $sect, %testfiles {
     # Split the tests by major section (S01, S02, etc.):
     say "Recording $sect";
     $feast.say: <div>.xml: :class<synopsis off>,
-        <div>.xml($sect.tc, :class<desc off>),
+        <div>.xml(@sect-descs.shift, :class<desc off>),
         |%testfiles.sort».kv.map: -> $testfile, @res {
             <div>.xml: :class<file off>,
                 <div>.xml(:class<desc off>,
