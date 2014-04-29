@@ -97,7 +97,7 @@ $feast.say: q:to[EOHTML];
     EOHTML
 
 END {
-    $feast.say: q:to[EOHTML];
+    $feast.say: qq:to[EOHTML];
         </body>
         </html>
         EOHTML
@@ -126,13 +126,13 @@ my @sect-descs =
     'S16: IO / User / Group',
     'S17: Concurrency',
     'S19: Compiling',
-    'S24: Command line interface',
     'S26: Introspection',
-    'S28: Calling foreign code',
     'S29: Distributions, Recommendations, Delivery and Installation',
     'S32: Security',
-    'Integration tests',
-    'Rosetta Code tests';
+    'Integration tests';
+
+die "@sect-descs has too many or too few test directories" if %dat != @sect-descs;
+
 for %dat.sort».kv -> $sect, %testfiles {
     # Split the tests by major section (S01, S02, etc.):
     say "Recording $sect";
