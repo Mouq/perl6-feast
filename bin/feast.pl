@@ -23,7 +23,8 @@ my Str @impls;
 for dir("log")[2..*] -> $log-path {
     my $impl = $log-path.parts<basename>.trans: /'_summary.out' $/ => '';
     say "Collecting the charred remains of $impl";
-    my $impl-num = @impls.push: $impl;
+    @impls.push: $impl;
+    my $impl-num = @impls.end;
 
     my $log-fh = $log-path.open;
     my $line = 0; # Rakudo's IO.ins tends to display total line count
@@ -85,9 +86,9 @@ $feast.say: q:to[EOHTML];
         <link href='http://fonts.googleapis.com/css?family=Marcellus' rel='stylesheet' type='text/css'>
         <link href='http://fonts.googleapis.com/css?family=Marcellus+SC' rel='stylesheet' type='text/css'>
         <link href='http://fonts.googleapis.com/css?family=Anonymous+Pro:400,400italic&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
-        <link href='feast-new.css' rel='stylesheet' type='text/css'>
+        <link href='feast.css' rel='stylesheet' type='text/css'>
         <script type='text/javascript' src='https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js'></script>
-        <script type='text/javascript' src='feast-new.js'></script>
+        <script type='text/javascript' src='feast.js'></script>
         <title>Feast: Roasted Perl 6</title>
     </head>
     <body>
