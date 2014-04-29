@@ -89,9 +89,12 @@ body > .subtitle {
 .impl1_4 { width: 61rem }
 .fudge > .desc {
     border-radius: 1em 1em 0 0;
-    background-color: pink;
+    background-color: lightblue;
     text-align: center;
     font-size: 1.2em;
+}
+.fudge > .desc.off {
+    border-radius: 1em;
 }
 .test + .test {
     border-top: solid 1px;
