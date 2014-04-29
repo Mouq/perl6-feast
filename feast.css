@@ -21,10 +21,9 @@ body > .subtitle {
     font-style: italic;
 }
 .impls {
-    width: 46rem; /* 15*3+1 */
-    margin: auto;
+    width: 61rem; /* 15*4+1 */
+    margin-left: 4rem;
     font-family: 'Marcellus', sans-serif;
-    text-align: right;
 }
 /* column width: 15rem */
 .impls > *, .fudge { width: 14rem; }
@@ -45,7 +44,6 @@ body > .subtitle {
 .synopsis {
     padding-bottom: 3px;
     border-bottom: 2px dotted;
-    margin: 3px;
 }
 .desc::before  {
     content: " ⊕ "; /* em-spaces */
@@ -60,7 +58,7 @@ body > .subtitle {
     font-size: 1.8em;
 }
 .synopsis > * {
-    margin-left: 2em;
+    margin-left: 2rem;
 }
 .file > .desc {
     font-family: 'Marcellus', sans-serif;
@@ -68,7 +66,7 @@ body > .subtitle {
     font-style: italic;
 }
 .file > * {
-    margin-left: 2em;
+    margin-left: 2rem;
 }
 .file {
     margin-top: 0.5em;
@@ -82,9 +80,13 @@ body > .subtitle {
 }
 .impl2 { left: 15rem; }
 .impl3 { left: 30rem; }
+.impl4 { left: 45rem; }
 .impl1_2 { width: 29rem }
 .impl2_3 { left: 15rem; width: 29rem; }
+.impl3_4 { left: 30rem; width: 29rem; }
 .impl1_3 { width: 44rem }
+.impl2_4 { left: 15rem; width: 44rem }
+.impl1_4 { width: 61rem }
 .fudge > .desc {
     border-radius: 1em 1em 0 0;
     background-color: pink;

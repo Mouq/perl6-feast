@@ -19,7 +19,7 @@ my %dat;
 my Str @impls;
 # Grab each file in log dir, extract
 # the skips, todos, etc. for each file.
-for dir("log")[2..*] -> $log-path {
+for dir("log")[0,2..*] -> $log-path {
     my $impl = $log-path.parts<basename>.trans: /'_summary.out' $/ => '';
     say "Collecting the charred remains of $impl";
     @impls.push: $impl;
@@ -36,7 +36,7 @@ for dir("log")[2..*] -> $log-path {
         # identical failures
         %dat{$section}{$test-file}{
             [~] <div>.xml(:class<desc>, xml-encode $desc ),
-            #<a>.xml: :class<ref>:href("%github<roast-data>$log-path#L$line"),
+                #<a>.xml: :class<ref>:href("%github<roast-data>$log-path#L$line"),
                     <div>.xml: :class<test>,
                         xml-encode $r
         }.push: $impl-num;
@@ -77,6 +77,31 @@ for dir("log")[2..*] -> $log-path {
     $log-fh.close
 }
 
+my @sect-descs =
+    'S01: Overview',
+    'S02: Bits and Pieces',
+    'S03: Summary of Perl 6 Operators',
+    'S04: Blocks and Statements',
+    'S05: Regexes and Rules',
+    'S06: Subroutines',
+    'S09: Data Structures',
+    'S10: Packages',
+    'S11: Compilation Units',
+    'S12: Objects',
+    'S13: Overloading',
+    'S14: Roles and Parametric Types',
+    'S16: IO / User / Group',
+    'S17: Concurrency',
+    'S19: Compiling',
+    'S26: Introspection',
+    'S28: Special Names',
+    'S29: Distributions, Recommendations, Delivery and Installation',
+    'S32: Security',
+    'Integration tests';
+
+die "@sect-descs has too many or too few test directories.
+Please compare:\n", %dat.keys.join("\n") if %dat != @sect-descs;
+
 say "Writing";
 my $feast = open 'feast.html', :w;
 
@@ -112,29 +137,6 @@ $feast.say: <div>.xml: :class<impls>,
     @impls.map: {
         <div>.xml: :class<impl>, $_.trans('.' => ' ').wordcase
     }
-
-my @sect-descs =
-    'S01: Overview',
-    'S02: Bits and Pieces',
-    'S03: Summary of Perl 6 Operators',
-    'S04: Blocks and Statements',
-    'S05: Regexes and Rules',
-    'S06: Subroutines',
-    'S09: Data Structures',
-    'S10: Packages',
-    'S11: Compilation Units',
-    'S12: Objects',
-    'S13: Overloading',
-    'S14: Roles and Parametric Types',
-    'S16: IO / User / Group',
-    'S17: Concurrency',
-    'S19: Compiling',
-    'S26: Introspection',
-    'S29: Distributions, Recommendations, Delivery and Installation',
-    'S32: Security',
-    'Integration tests';
-
-die "@sect-descs has too many or too few test directories" if %dat != @sect-descs;
 
 for %dat.sort».kv -> $sect, %testfiles {
     # Split the tests by major section (S01, S02, etc.):
